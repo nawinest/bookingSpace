@@ -1,0 +1,157 @@
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+
+
+
+
+
+
+/*hero search*/
+
+
+/*body {background-color: #3c1f55;}*/
+
+.hero-search {
+    height: auto;
+    border: 20px solid #e237a0;
+    padding: 0.5em 1em;
+}
+
+.hero-search {
+    color: #3c1f55;
+}
+
+.input-search {
+    color: #3c1f55;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #e237a0;
+    padding: .5em;
+}
+
+.input-search:focus {
+    outline: none;
+}
+
+
+.list_page {
+
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.label-search {
+    margin-bottom: 1em;
+}
+
+.bottom-hero {
+    color: white;
+    padding: 10px;
+    background-color: #3c1f55;
+    margin-bottom: 10px;
+}
+
+.for_submit {
+    margin-top: 1em;
+}
+
+.button-submit {
+    text-align: center;
+    width: 100%;
+    border: none;
+    padding: 12px;
+    color: white;
+    background-color: #e237a0;
+}
+
+@media (max-width: 756px) {
+    .hero-search {
+        margin-top: 0;
+    }
+}
+
+
+
+
+
+
+
+
+/*finish hero search*/
+
+
+/*tab content*/
+
+.nav-wrap {
+    text-align: center;
+}
+
+
+ul.tabs {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+ul.tabs li {
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+
+
+ul.tabs li:hover {
+    border-bottom: 4px #e237a05e solid;
+    color: #222;
+}
+
+ul.tabs li.current {
+    border-bottom: 4px #e237a0 solid;
+    color: #222;
+}
+
+.tab-content {
+    display: none;
+    /*background: #ededed;*/
+    padding: 15px;
+}
+
+.tab-content.current {
+    display: block;
+}
+
+.toggle-btn {
+    padding: 10px;
+    margin: 5px;
+}
+
+.button-submit-2 {
+    padding: 10px;
+    width: 100%;
+    background-color: #e237a0;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #e237a0;
+}
+
+.button-submit-2:hover,
+.button-submit:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.close-btn:hover {
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.show-collapse {
+	border: none;
+	background-color: transparent;
+}

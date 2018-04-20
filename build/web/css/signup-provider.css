@@ -1,0 +1,30 @@
+.input-signup{
+    color: black;
+    border: none;
+    padding: 10px 13px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, .1);
+    width: 100%;
+}
+
+.input-signup:focus{
+    outline: none;
+}
+
+
+.grousp{
+    margin-bottom: 15px;
+}
+
+.button-submit{
+    
+    text-align: center;
+    width: 100%;
+    border: none;
+    padding: 12px;
+    color: white;
+    background-color: #e237a0;
+}
+.last{
+    margin-bottom: 5em;
+}

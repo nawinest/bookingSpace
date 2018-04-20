@@ -1,0 +1,437 @@
+* {
+    font-family: 'Kanit', sans-serif;
+    box-sizing: border-box;
+}
+
+.no-decorection {
+    text-decoration: none;
+}
+
+.top-section {
+    font-weight: bolder;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header-content {
+    padding: 10em 0;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-90deg, #e237a0, #3c1f55);
+
+    /* background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;*/
+}
+
+.topper {
+    padding: 25px;
+    background-color: white;
+}
+
+
+.font-aw {
+    color: #008489;
+}
+
+.text-header {
+    font-size: 50px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.header-content {
+    color: white;
+}
+
+
+
+
+
+
+
+
+/*navbar*/
+
+.nav-logged {
+    font-size: 1em;
+    min-width: 170px;
+    display: block;
+    color: white;
+    font-family: 'Kanit', sans-serif;
+    border-radius: none;
+    border: none;
+    background-color: transparent;
+}
+
+.nav-logged:focus {
+
+    outline: none;
+    color: white;
+}
+
+.nav-logged:hover {
+
+    color: #e237a0;
+    cursor: pointer;
+}
+
+@media (max-width: 790px) {
+    .nav-logged {
+        font-size: 0.75em;
+    }
+}
+
+
+
+/*override bootstrap*/
+
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .0em;
+    vertical-align: .0em;
+    content: "";
+    border-top: .0 solid !important;
+    border-right: .0em solid transparent !important;
+    border-bottom: 0;
+    border-left: .0em solid transparent;
+}
+
+.navbar-brand {
+
+    width: 25%;
+}
+
+.navbar-color {
+    background-color: #3c1f55;
+}
+
+.navbar-txt {
+    color: white;
+}
+
+.icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: white;
+    margin-top: 4px;
+}
+
+.navbar .navbar-btn-login {
+    font-family: 'Kanit', sans-serif;
+    border-radius: 24px;
+    color: white;
+    background-color: transparent;
+    border: 1px solid #fff;
+    padding: 3px 20px;
+}
+
+
+.cl-white {
+    font-weight: normal;
+    color: white;
+    border-bottom-width: 0px;
+    transition: 3s all;
+}
+
+.cl-white:hover {
+    border-bottom-width: 2px;
+    border-bottom: solid white;
+
+    color: white;
+}
+
+
+
+
+
+/*finish navbar*/
+
+
+/*section-search*/
+
+.topic-search {
+    margin-top: 20px;
+}
+
+.input {
+    padding: 3px;
+}
+
+.search-tab {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.custom-select {
+    border-radius: 0!important;
+    height: 45px;
+    box-shadow: none;
+    /*border: 1px solid!important;*/
+}
+
+.people {
+    padding-left: 10px;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+}
+
+.bt-f {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.button_submit {
+    padding: 10px 25px;
+    background: #1477ca;
+    color: white;
+}
+
+
+
+
+
+
+
+
+/*finish section-search*/
+
+
+/*section-show-sponser*/
+
+.section-show-sponser {
+    height: 100%;
+    padding: 25px 0;
+    /*background-color: red;*/
+}
+
+.card-hardcode {
+    width: 100%;
+}
+
+
+
+.tp {
+    font-weight: bold;
+    text-align: center;
+    /*color: white;*/
+}
+
+.th-text {
+    font-family: 'Roboto', sans-serif;
+}
+
+.sub-menu {
+    font-size: 0.76em;
+    margin-top: -0.25rem;
+}
+
+.name_place {
+    font-weight: bolder;
+}
+
+
+
+
+
+
+
+
+
+/*>> card*/
+
+.show-pic-spon {
+    border-radius: 4px;
+}
+
+.sponpic1 {
+    padding-top: 70%;
+    width: 100%;
+    height: 100%;
+    background-image: url("../asset/sponser/pic.jpg");
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+}
+
+.sponpic2 {
+    padding-top: 70%;
+    width: 100%;
+    height: 100%;
+    background-image: url("../asset/sponser/pic2.jpg");
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+}
+
+.show_sponser_1 {
+    margin: 0.5em 0;
+}
+
+.content-sponser {
+    margin-top: 8px;
+}
+
+.owner_place {
+    opacity: 0.75%;
+    color: #008489;
+    font-size: 0.75em;
+}
+
+.cost_place {
+    font-size: 0.75em;
+    color: #6c6c6c;
+}
+
+
+
+
+
+
+
+
+
+/*>>finish card*/
+
+
+/*section about us*/
+
+.about_us {
+    background: linear-gradient(-90deg, #C33764, #1D2671);
+}
+
+
+.content-sub {
+    color: white;
+    font-family: 'Kanit', sans-serif;
+}
+
+
+
+
+
+
+/*finish section about us*/
+
+
+/*footer*/
+
+.footer-nw {
+    color: white;
+    background-color: #333;
+}
+
+.become_partner {
+    border-radius: 3px;
+    width: 100%;
+    background-color: Transparent;
+    border: solid 1px white;
+}
+
+.become_partner a {
+    color: white;
+}
+
+.become_partner a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.sub-bg-footer {
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
+
+/*>>>button in footer*/
+
+.button-two {
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1em;
+    /*margin: 0 0 0 100px;*/
+}
+
+.button-two {
+    /*border-radius: 4px;*/
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+}
+
+
+.button-two span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button-two span:after {
+
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button-two:hover span {
+    padding-right: 25px;
+}
+
+.button-two:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+
+
+
+
+
+
+/*finish footer*/
+
+
+/*override*/
+
+@media (max-width: 767.98px) {
+    .search-tab {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .header-content {
+        height: 100vh;
+        background-size: auto 100%
+    }
+}
+
+
+
+.separator-button,
+.layout-container .separator-top {
+    height: 15vh;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

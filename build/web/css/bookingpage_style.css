@@ -1,0 +1,91 @@
+    * {
+        box-sizing: border-box;
+    }
+
+    .line_separate {
+        width: 100%;
+        height: 15px;
+    }
+
+    .img-responsive {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
+    img {
+        vertical-align: center;
+    }
+
+    a {
+        /*color: #ec0186;*/
+        text-decoration: none;
+    }
+
+    .txt-b:hover {
+        color: black;
+        font-weight: 400;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+
+    .ticket-info {
+        font-family: 'Kanit', sans-serif;
+    }
+
+    .tab_on {
+        font-family: 'Kanit', sans-serif;
+        font-weight: 500;
+        padding: 8px 15px;
+        margin-bottom: 28px;
+        list-style: none;
+        background-color: transparent;
+        border-radius: 4px;
+    }
+
+    .txt-b {
+        color: black;
+    }
+
+
+    .txt-b .far {
+        color: #ec0186;
+    }
+
+
+    .ticket-warp {
+        box-shadow: 0 10px 6px -6px rgba(0,0,0,0.1), 0 3px 20px 5px rgba(0,0,0,0.1);
+        padding: 1em;
+        border-radius: 0.3em;
+        border-color: rgba(0, 0, 0, .3);
+        margin-bottom: 2em;
+    }
+
+    .place-info {
+        font-size: 13px;
+        margin-bottom: 1em;
+    }
+
+
+
+    .logo_place {
+    	/*border-radius: 1em;*/
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .img-tab {
+        padding: 0;
+    }
+
+    .btn-can{
+    	width: 100%;
+    	color: white;
+    	background-color: #ec0186;
+    	padding:10px;
+    	border: none;
+    }
+
+
