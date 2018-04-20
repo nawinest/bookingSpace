@@ -10,9 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/stylelogin.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/stylelogin.css"/>
+        <link rel="stylesheet" type="text/css" href="css/login_2.css"/>
         <link href="https://fonts.googleapis.com/css?family=Athiti|Jura|Quicksand|Roboto" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +21,9 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
         <!-- ///////delete it later -->
     </head>
+    <style>
+        <%@include file="css/login_2.css"%>
+    </style>
     <body>
         <%@ include file="header-nav.jsp" %>
         <div class="login-from-wrapper">
@@ -44,11 +48,11 @@
                 <div class="content-footer-from">
                     If you don't have an account ? <a href="signup.jsp">click</a>
                 </div>
-                
-                <div class="loginProvider">
-                    <a href="login_provider.jsp"><button class="login_as_provider_btn">Login as Provider</button></a>
+
+                <div class="content-footer-from">
+                    <button class="btn apl" style=""><a href="login_provider.jsp"">Login as Provider</a></button>
                 </div>
-                
+
             </div>
         </div>
     </div>

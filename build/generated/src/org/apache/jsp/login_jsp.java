@@ -12,7 +12,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
   private static java.util.List<String> _jspx_dependants;
 
   static {
-    _jspx_dependants = new java.util.ArrayList<String>(1);
+    _jspx_dependants = new java.util.ArrayList<String>(2);
+    _jspx_dependants.add("/css/login_2.css");
     _jspx_dependants.add("/header-nav.jsp");
   }
 
@@ -54,9 +55,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>JSP Page</title>\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.min.css\">\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylelogin.css\">\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\"/>\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.min.css\"/>\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/stylelogin.css\"/>\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/login_2.css\"/>\n");
       out.write("        <link href=\"https://fonts.googleapis.com/css?family=Athiti|Jura|Quicksand|Roboto\" rel=\"stylesheet\">\n");
       out.write("        <link href=\"https://fonts.googleapis.com/css?family=Kanit\" rel=\"stylesheet\">\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n");
@@ -64,6 +66,23 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.0.9/css/all.css\" integrity=\"sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1\" crossorigin=\"anonymous\">\n");
       out.write("        <!-- ///////delete it later -->\n");
       out.write("    </head>\n");
+      out.write("    <style>\n");
+      out.write("        ");
+      out.write("/*\n");
+      out.write("To change this license header, choose License Headers in Project Properties.\n");
+      out.write("To change this template file, choose Tools | Templates\n");
+      out.write("and open the template in the editor.\n");
+      out.write("*/\n");
+      out.write("/* \n");
+      out.write("    Created on : Apr 21, 2018, 3:56:28 AM\n");
+      out.write("    Author     : mac\n");
+      out.write("*/\n");
+      out.write("\n");
+      out.write(".apl{\n");
+      out.write("    color:red;\n");
+      out.write("}");
+      out.write("\n");
+      out.write("    </style>\n");
       out.write("    <body>\n");
       out.write("        ");
       out.write("\n");
@@ -183,11 +202,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <div class=\"content-footer-from\">\n");
       out.write("                    If you don't have an account ? <a href=\"signup.jsp\">click</a>\n");
       out.write("                </div>\n");
-      out.write("                \n");
-      out.write("                <div class=\"loginProvider\">\n");
-      out.write("                    <a href=\"login_provider.jsp\"><button class=\"login_as_provider_btn\">Login as Provider</button></a>\n");
+      out.write("\n");
+      out.write("                <div class=\"content-footer-from\">\n");
+      out.write("                    <button class=\"btn apl\" style=\"\"><a href=\"login_provider.jsp\"\">Login as Provider</a></button>\n");
       out.write("                </div>\n");
-      out.write("                \n");
+      out.write("\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("    </div>\n");
