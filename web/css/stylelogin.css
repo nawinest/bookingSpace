@@ -75,6 +75,23 @@
     outline: none;
 }
 
+.loginProvider{
+
+    width: 100%;
+    text-align: center;
+}
+.login_as_provider_btn{
+    font-size: 0.7em;
+    /*margin: 0 auto;*/
+    margin-top: 15px;
+    color: white;
+    width: 50%;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 25px;
+    background: #e237a0;
+}
+
 
 .header img {
     width: 70%;
