@@ -1,6 +1,6 @@
 <%-- 
-    Document   : show_updated
-    Created on : Apr 17, 2018, 6:22:00 PM
+    Document   : showimage
+    Created on : Apr 22, 2018, 3:18:50 AM
     Author     : mac
 --%>
 
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <img src="${pageContext.request.contextPath}/images?username=hello">
+        <img src="${pageContext.request.contextPath}/images?data:image/jpeg;base64,${imgBase}" />
     </body>
 </html>

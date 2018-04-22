@@ -37,7 +37,8 @@
                 <div class="search-form">
 
                     <div class="bt-f">
-                        <button class="button_submit"> <i class="fas fa-search"></i> EXPLORE </button>
+                        <a href="search-list.jsp"><button class="button_submit"> <i class="fas fa-search"></i> EXPLORE </button>
+                    </a>
                     </div>
 
                 </div>

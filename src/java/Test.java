@@ -3,34 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Provider;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author mac
  */
-@WebServlet(name = "LoginProviderServlet", urlPatterns = {"/login_provider.do"})
-public class LoginProviderServlet extends HttpServlet {
 
-    private Connection conn;
+@MultipartConfig
+@WebServlet(urlPatterns = {"/Test"})
+public class Test extends HttpServlet {
+    private Connection con;
     private ServletContext sc;
     private HttpSession session;
-    private Provider pv;
-    private String username;
-    private String password;
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,28 +46,36 @@ public class LoginProviderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        sc = getServletContext();
-        conn = (Connection) sc.getAttribute("conn");
-        username = request.getParameter("username");
-        password = request.getParameter("password");
-        pv = new Provider(conn);
-
-        String checkIsProvider_result = pv.checkIsProvider(username, password);
-        System.out.println(checkIsProvider_result);
-        if (checkIsProvider_result.equals("provider")) {
-            System.out.println("logged");
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("password", password);
-            session.setAttribute("idCard", pv.getIdCard());
-            session.setAttribute("phone", pv.getPhone());
-            session.setAttribute("email", pv.getEmail());
-            session.setAttribute("address", pv.getAddress());
-            session.setAttribute("owner", pv.getOwner());
-            session.setAttribute("role", "provider");
-            response.sendRedirect("manage-place.jsp");
-        } else {
-            response.sendRedirect("error.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            sc = getServletContext();
+            con = (Connection) sc.getAttribute("conn");
+            session = request.getSession();
+            
+            String username = request.getParameter("description"); // Retrieves <input type="text" name="description">
+            Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+            
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+            InputStream fileContent = filePart.getInputStream();
+            
+            out.println("test");
+            
+            PreparedStatement preparedStatement;
+            try {
+                preparedStatement = con.prepareStatement("INSERT INTO uploadimg (img, username) VALUES (?, ?)");
+                preparedStatement.setString(2, username);
+                preparedStatement.setBinaryStream(1, fileContent);
+       
+                preparedStatement.executeUpdate();
+                
+                out.println("yes ");
+                
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
         }
     }
 

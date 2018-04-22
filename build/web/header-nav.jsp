@@ -32,11 +32,8 @@
                             <h5 class="dropdown-header nav-logged">เกี่ยวกับคุณ</h5>
                             <a class="dropdown-item nav-logged" href="#">ประวัติการจอง</a>
                             <a class="dropdown-item nav-logged" href="edit-profile.jsp">แก้ไขโปรไฟล์</a>
-                            <a class="dropdown-item nav-logged" href="logout.do">ออกจากระบบ์</a>
-                            <hr>
-                            <h5 class="dropdown-header nav-logged">สถานที่</h5>
-                            <a class="dropdown-item nav-logged" href="#">ลงสถานที่ของคุณ</a>
-                            <a class="dropdown-item nav-logged" href="#">จัดการสถานที่</a>
+                            <a class="dropdown-item nav-logged" href="logout.do">ออกจากระบบ</a>
+                            
                         </div>
                     </div>
                 </ul>
@@ -53,9 +50,11 @@
                         </button>
                         <div class="dropdown-menu">
                             <h5 class="dropdown-header nav-logged">เกี่ยวกับคุณ</h5>
-                            <a class="dropdown-item nav-logged" href="#">ประวัติการจอง</a>
-                            <a class="dropdown-item nav-logged" href="edit-profile.jsp">แก้ไขโปรไฟล์</a>
-                            <a class="dropdown-item nav-logged" href="logout.do">ออกจากระบบ์</a>
+                            <a class="dropdown-item nav-logged" href="become-Host.jsp">ลงสถานที่ของคุณ</a>
+                            <a class="dropdown-item nav-logged" href="manage-place.jsp">จัดการสถานที่</a>
+      
+                            <a class="dropdown-item nav-logged" href="edit-profile.jsp">ลงโฆษณา</a>
+                            <a class="dropdown-item nav-logged" href="logout.do">ออกจากระบบ</a>
                         </div>
                     </div>
                 </ul>

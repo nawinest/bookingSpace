@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/stylelogin.css"/>
-        <link rel="stylesheet" type="text/css" href="css/login_2.css"/>
+       
         <link href="https://fonts.googleapis.com/css?family=Athiti|Jura|Quicksand|Roboto" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,13 +44,14 @@
                         <div class="group">
                             <input type="submit" class="button_login" value="Sign In">
                         </div>
+                    </div>
                 </form>
                 <div class="content-footer-from">
                     If you don't have an account ? <a href="signup.jsp">click</a>
                 </div>
 
                 <div class="content-footer-from">
-                    <button class="btn apl" style=""><a href="login_provider.jsp"">Login as Provider</a></button>
+                    <button class="btn-login_2" style=""><a href="login_provider.jsp"">Login as Provider <i class="fas fa-angle-right"></i></a></button>
                 </div>
 
             </div>

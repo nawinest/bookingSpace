@@ -6,8 +6,17 @@
 package controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,21 +24,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Provider;
 
 /**
  *
  * @author mac
  */
-@WebServlet(name = "LoginProviderServlet", urlPatterns = {"/login_provider.do"})
-public class LoginProviderServlet extends HttpServlet {
+@WebServlet(name = "ImageServlet", urlPatterns = {"/images/*"})
+public class ImageServlet extends HttpServlet {
 
-    private Connection conn;
+    private Connection con;
     private ServletContext sc;
     private HttpSession session;
-    private Provider pv;
-    private String username;
-    private String password;
+    byte[] imgData = null;
+    private Statement st;
+
+    ResultSet rs = null;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,32 +52,32 @@ public class LoginProviderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        sc = getServletContext();
-        conn = (Connection) sc.getAttribute("conn");
-        username = request.getParameter("username");
-        password = request.getParameter("password");
-        pv = new Provider(conn);
 
-        String checkIsProvider_result = pv.checkIsProvider(username, password);
-        System.out.println(checkIsProvider_result);
-        if (checkIsProvider_result.equals("provider")) {
-            System.out.println("logged");
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("password", password);
-            session.setAttribute("idCard", pv.getIdCard());
-            session.setAttribute("phone", pv.getPhone());
-            session.setAttribute("email", pv.getEmail());
-            session.setAttribute("address", pv.getAddress());
-            session.setAttribute("owner", pv.getOwner());
-            session.setAttribute("role", "provider");
-            response.sendRedirect("manage-place.jsp");
-        } else {
-            response.sendRedirect("error.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            sc = getServletContext();
+            con = (Connection) sc.getAttribute("conn");
+            session = request.getSession();
+            String username = request.getParameter("username");
+            String sql = "select img from uploadimg where username = ?";
+
+            PreparedStatement ps;
+            try {
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    byte[] imgData = rs.getBytes("img"); // blob field 
+                    String encode = Base64.getEncoder().encodeToString(imgData);
+                    request.setAttribute("imgBase", encode);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ImageServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
