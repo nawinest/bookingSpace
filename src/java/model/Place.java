@@ -14,20 +14,6 @@ import java.sql.Statement;
  */
 public class Place {
 
-    private Connection con;
-    private Statement st;
-
-    public Place(Connection con) {
-        this.con = con;
-
-        try {
-            st = con.createStatement();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public Place() {
-    }
+    //query by name_place
 
 }

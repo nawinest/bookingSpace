@@ -17,17 +17,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Provider;
 
-
 /**
  *
  * @author mac
  */
 @WebServlet(name = "SignUpProviderServlet", urlPatterns = {"/signup-provider.do"})
 public class SignUpProviderServlet extends HttpServlet {
+
     private Connection con;
     private ServletContext sc;
     private HttpSession session;
     private Provider pv;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,25 +41,30 @@ public class SignUpProviderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             sc = getServletContext();
             con = (Connection) sc.getAttribute("conn");
             session = request.getSession();
             pv = new Provider(con);
+
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String idCard = request.getParameter("idCard");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             String owner = request.getParameter("owner");
+            System.out.println(owner + "vvvv");
             String address = request.getParameter("address");
             Boolean insertR = pv.insertNewProvider(username, password, idCard, phone, email, address, owner);
-            if(insertR){
+            if (insertR) {
                 response.sendRedirect("login.jsp");
-            }
-            else{
-                
+            } else {
+
             }
         }
     }

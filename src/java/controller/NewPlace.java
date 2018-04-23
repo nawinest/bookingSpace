@@ -1,40 +1,42 @@
-package controller;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Members;
+import javax.servlet.http.Part;
+import model.Picture;
+import model.PlaceDescription;
 
 /**
  *
  * @author mac
  */
-@WebServlet(urlPatterns = {"/login.do"})
-public class LoginServlet extends HttpServlet {
+@MultipartConfig
+@WebServlet(name = "NewPlace", urlPatterns = {"/newplace.do"})
+public class NewPlace extends HttpServlet {
 
     private Connection conn;
-    
     private ServletContext sc;
-    private String sql;
-    private String username;
-    private String password;
-  
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,35 +50,51 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             sc = getServletContext();
             conn = (Connection) sc.getAttribute("conn");
-            username = request.getParameter("username");
-            password = request.getParameter("password");
-            Members mb = new Members(conn);
+            HttpSession session = request.getSession();
+            //place description
+            String place_name = request.getParameter("place_name");
+            String place_featured = request.getParameter("place_featured");
+            String place_description = request.getParameter("place_description");
+            String place_status = "open";
+            String place_lat = request.getParameter("place_lat");
+            String place_lng = request.getParameter("place_lng");
+            String place_zone = request.getParameter("place_zone");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String owner_name = (String) session.getAttribute("owner");
+            Double price_phour = Double.parseDouble(request.getParameter("price_phour"));
+            String place_address = request.getParameter("place_address");
+
+            //section 1 place description insert
+            PlaceDescription pd = new PlaceDescription(conn);
+            String insertPlaceDescriptionResult = pd.insertNewPlace(place_name, place_featured, place_description,
+                     place_status, place_lat, place_lng, place_zone,
+                     phone, email, owner_name, price_phour, place_address);
+            //finish that section 1
+
+            List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName())).collect(Collectors.toList()); // Retrieves <input type="file" name="file" multiple="true">
             
-            if (mb.queryMember(username, password).equals("member")){
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                session.setAttribute("password", password);
-                session.setAttribute("name", mb.getName());
-                session.setAttribute("phone", mb.getPhone());
-                session.setAttribute("email", mb.getEmail());
-                session.setAttribute("logged", true);
-            
-                response.sendRedirect("index.jsp");
+            for (Part filePart : fileParts) {
+                Picture pc = new Picture(conn);
+                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+                InputStream fileContent = filePart.getInputStream();
+                pc.InsertThePicture(fileContent,fileName,place_name);
             }
-            else{
-                response.sendRedirect("login-error.jsp");
+            
+            if (insertPlaceDescriptionResult.equals("success")) {
+                response.sendRedirect("create_place_success.jsp");
             }
-            
-            System.out.println("login - it working");
-            
-            
-            
-            
+
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
