@@ -39,46 +39,67 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="hero-search">
-                            <div class="header-hero">
-                                Search again here!
-                            </div>
+
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="label-search">
-                                        ความจุ
                                     </div>
                                     <div>
-                                        <input class="input-search" type="input" name="">
+                                        <span class="select-wrapper">
+                                            <select class="form-control no-radius">
+                                                <option value="0" disabled="" selected="true"> คุณต้องการทำกิจกรรมอะไร ? </option>
+                                                <option value="1">ประชุม </option>
+                                                <option value="1">สัมมนา </option>
+                                                <option value="1">เวิร์คช็อป </option>
+                                                <option value="1">งานเปิดตัวสินค้า </option>
+                                                <option value="1">ปาร์ตี้ </option>
+                                                <option value="1">ถ่ายภาพ / บันทึกภาพ </option>
+                                                <option value="1">มินิคอนเสิร์ต</option>
+                                            </select>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+
+                                <div class="col-md-4">
                                     <div class="label-search">
-                                        ความจุ
                                     </div>
                                     <div>
-                                        <input class="input-search" type="input" name="">
+                                        <span class="select-wrapper">
+                                            <select class="form-control no-radius">
+                                                <option value="0" disabled="" selected="true"> กิจกรรมถูกจัดที่ย่านใด ? </option>
+                                                <option value="1">ประชุม </option>
+                                                <option value="1">สัมมนา </option>
+                                                <option value="1">เวิร์คช็อป </option>
+                                                <option value="1">งานเปิดตัวสินค้า </option>
+                                                <option value="1">ปาร์ตี้ </option>
+                                                <option value="1">ถ่ายภาพ / บันทึกภาพ </option>
+                                                <option value="1">มินิคอนเสิร์ต</option>
+                                            </select>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="label-search">
-                                        ความจุ
                                     </div>
                                     <div>
-                                        <input class="input-search" type="input" name="">
+                                        <span class="select-wrapper">
+                                            <select class="form-control no-radius">
+                                                <option value="0" disabled="" selected="true"> จำนวนคน </option>
+                                                <option value="1">0-10 </option>
+                                                <option value="1">10+ </option>
+                                                <option value="1">20+ </option>
+                                                <option value="1">50+ </option>
+                                                <option value="1">100+ </option>
+
+                                            </select>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="label-search">
-                                        ความจุ
-                                    </div>
-                                    <div>
-                                        <input class="input-search" type="input" name="">
-                                    </div>
-                                </div>
+
                             </div>
-                            <div class="row for_submit">
-                                <div class="col-md-3">
-                                    <input class="button-submit" type="summit" value="Submit" name="">
+                            <div class="row" style="margin-top: 0.5em;">
+                                <div class="col-md-3 align-self-end" style="margin-bottom: -0.6em;">
+                                    <input class="button-submit" type="summit" value="FIND PLACE !" name="">
                                 </div>
                             </div>
 

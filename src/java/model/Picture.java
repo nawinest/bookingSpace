@@ -35,6 +35,9 @@ public class Picture {
         }
     }
 
+    public Picture(){
+        
+    }
     public String InsertThePicture(InputStream fileContent, String fileName,String place_name) {
         
         File targetFile = new File("/Users/mac/Pictures/upload_test/"+fileName);

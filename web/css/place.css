@@ -176,3 +176,23 @@ margin: 0 auto;
 .policy{
 	font-size: 0.5em;
 }
+
+
+.place_name{
+	font-weight: 200;
+}
+
+
+.bt{
+	padding: 10px;
+	text-align: center;
+	box-sizing: border-box;
+	width: 50%;
+	float: left;
+	/*border: 0.5px solid black;*/
+/**/
+	/*background-color: red;*/
+}
+.topic_s{
+	color: #e237a0;
+}

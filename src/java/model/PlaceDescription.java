@@ -162,5 +162,9 @@ public class PlaceDescription {
         return "none"; 
     }
     
+    public void queryPlaceDescription(){
+        
+    }
+    
     
 }

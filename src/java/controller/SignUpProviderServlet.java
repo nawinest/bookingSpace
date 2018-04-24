@@ -62,7 +62,7 @@ public class SignUpProviderServlet extends HttpServlet {
             String address = request.getParameter("address");
             Boolean insertR = pv.insertNewProvider(username, password, idCard, phone, email, address, owner);
             if (insertR) {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("login_provider.jsp");
             } else {
 
             }

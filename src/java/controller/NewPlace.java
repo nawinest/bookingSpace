@@ -25,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.Picture;
+import model.PlaceAppropriate;
 import model.PlaceDescription;
+import model.PlaceType;
 
 /**
  *
@@ -49,7 +51,7 @@ public class NewPlace extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -76,25 +78,54 @@ public class NewPlace extends HttpServlet {
             //section 1 place description insert
             PlaceDescription pd = new PlaceDescription(conn);
             String insertPlaceDescriptionResult = pd.insertNewPlace(place_name, place_featured, place_description,
-                     place_status, place_lat, place_lng, place_zone,
-                     phone, email, owner_name, price_phour, place_address);
+                    place_status, place_lat, place_lng, place_zone,
+                    phone, email, owner_name, price_phour, place_address);
             //finish that section 1
 
+            //section 2 upload picture
             List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName())).collect(Collectors.toList()); // Retrieves <input type="file" name="file" multiple="true">
-            
             for (Part filePart : fileParts) {
                 Picture pc = new Picture(conn);
                 String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
                 InputStream fileContent = filePart.getInputStream();
-                pc.InsertThePicture(fileContent,fileName,place_name);
+                pc.InsertThePicture(fileContent, fileName, place_name);
             }
+            //finish section 2
+
+            //section 3 type_place insert
+            String[] type_place = request.getParameterValues("type_place");
+            PlaceType pt = new PlaceType(conn);
+            pt.insertType(type_place, place_name);
+            //finish that section 3
+
+            //section 4 insert appropriate of place
+            String good_meeting = request.getParameter("good_meeting");
+            String good_seminar = request.getParameter("good_seminar");
+            String good_workshop = request.getParameter("good_workshop");
+            String good_openproduct = request.getParameter("good_openproduct");
+            String good_party = request.getParameter("good_party");
+            String good_photo = request.getParameter("good_photo");
+            String good_concert = request.getParameter("good_concert");
+            PlaceAppropriate pa = new PlaceAppropriate(conn);
+            boolean paResult = pa.InsertPA(good_meeting, good_seminar, good_workshop, good_openproduct, good_party, good_photo, good_concert,place_name);
+            
+//            System.out.println(good_seminar);
+//            System.out.println(good_workshop);
+//            System.out.println(good_openproduct);
+//            System.out.println(good_party);
+//            System.out.println(good_photo);
+//            System.out.println(good_concert);
+
+            // finish
+            
+            
             
             if (insertPlaceDescriptionResult.equals("success")) {
                 response.sendRedirect("create_place_success.jsp");
             }
 
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

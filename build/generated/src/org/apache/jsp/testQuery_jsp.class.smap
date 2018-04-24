@@ -1,0 +1,12 @@
+SMAP
+testQuery_jsp.java
+JSP
+*S JSP
+*F
++ 0 testQuery.jsp
+testQuery.jsp
+*L
+5,18:49
+23,12:68
+34,4:80
+*E

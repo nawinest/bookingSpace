@@ -63,7 +63,7 @@
                                     </div>
                                     <hr class="hr-b">
                                 </div>
-                                
+
                                 <div class="input-grouper">
                                     <div class="label-input">
                                         รูปภาพสถานที่ (จำกัดแค่สองรูป) <span class="important">*</span>
@@ -93,72 +93,43 @@
                                 </div>
                                 <div class="input-grouper">
                                     <div class="label-input">
-                                        ประเภทสถานที่ <span class="important">*</span>
-                                    </div>
-                                    <div class="">
+                                        ประเภทของงานที่เหมาะสมกับพื้นที่ของคุณ? <span class="important">*</span>
                                         <div class="input-grouper">
                                             <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="1" id="1"> Hotel
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="2" id="2"> Conference / Exhibition Hall
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="3" id="3"> Restaurant &amp; Cafe
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="4" id="4"> Bar
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="5" id="5"> Outdoor
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="6" id="6"> Meeting
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="7" id="7"> Theater
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="8" id="8"> Unique Venue
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="9" id="9"> Co-working space
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="10" id="10"> Gallery / Museum / Library
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="11" id="11"> Rooftop
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="SelectedVenueTypes" value="12" id="12"> Others
-                                                </label>
+                                                <input type="radio" name="good_meeting" value="1"> ประชุม
+                                                <br>
+                                                <input type="radio" name="good_seminar" value="2"> สัมมนา
+                                                <br>
+                                                <input type="radio" name="good_workshop" value="3"> เวิร์คช็อป
+                                                <br>
+                                                <input type="radio" name="good_openproduct" value="4"> งานเปิดตัวสินค้า
+                                                <br>
+                                                <input type="radio" name="good_party" value="5"> ปาร์ตี้
+                                                <br>
+                                                <input type="radio" name="good_photo" value="6"> ถ่ายภาพ / บันทึกภาพ
+                                                <br>
+                                                <input type="radio" name="good_concert" value="7"> มินิคอนเสิร์ต
+                                                <br>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr class="hr-b">
+                                </div>
+                                <div class="input-grouper">
+                                    <div class="label-input">
+                                        ประเภทสถานที่ <span class="important">*</span>
+                                    </div>
+                                    <!--test-->
+                                    <div>
+                                        <select name="type_place" multiple="multiple" style="width: 100%;padding:0.5em;">
+                                            <option value="1">Hotel</option>
+                                            <option value="2">Conference / Exhibition Hall</option>
+                                            <option value="3">Restaurant & Cafe</option>
+                                            <option value="4">Co-working space</option>
+                                            <option value="5">Others</option>
+                                        </select>
+                                    </div>
+
                                     <hr class="hr-b">
                                 </div>
                                 <div class="input-grouper">
@@ -255,7 +226,7 @@
                                     </div>
                                     <hr class="hr-b">
                                 </div>
-              
+
                                 <div class="pick-map-wrap">
                                     <div class="input-grouper pick-map">
                                         <div class="label-input">
@@ -289,6 +260,16 @@
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/googleMapCustom.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXS40rABuuIrWI7ks0h-1NxNTp7BReXbg&libraries=places&callback=initMap" async defer></script>
+        <script type="text/javascript">
+                                            var val = -1;
+                                            $(':radio').on("click", function () {
+                                                if ($(this).val() == val) {
+                                                    $(this).prop('checked', false);
+                                                    val = -1;
+                                                } else
+                                                    val = $(this).val();
+                                            });
+        </script>
     </body>
     <% } else {
             response.sendRedirect("error-loginbefore_pv.jsp");

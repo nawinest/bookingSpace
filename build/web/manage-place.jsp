@@ -4,7 +4,11 @@
     Author     : mac
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="model.Place"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,29 +31,43 @@
             <div class="content">
                 <div class="main-topic">
                     <h3>Manage your place</h3>
-                    <hr>
+                    
                 </div>
                 <div class="show-place">
-                    <table class="table"  style="border-radius: 10px;">
-                        <thead class="thead-dark"">
-                            <tr>
-                                <th>ชื่อสถานที่</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
+                    <div class="show_all_place">
+                        <div class="place">
+                            <%
+                                ServletContext sc = getServletContext();
+                                Connection conn = (Connection) sc.getAttribute("conn");
+                                Place p = new Place(conn);
+                                String owner_name = (String) session.getAttribute("owner");
+                                List<String> rs_place_name = p.queryPlaceByNameProvider(owner_name);
+                                for (String place_name : rs_place_name) {
 
-                                <td>John</td>
-                                <td>
-                                    <a href="manage-booking.jsp"><button class="btn btn-primary">ดูการจอง</button></a>
-                                    <a href="#"><button class="btn btn-warning">ลงโฆษณา</button></a>
-                                </td>
 
-                            </tr>
-
-                        </tbody>
-                    </table>
+                            %>
+                            คุณ : <%=owner_name%>
+                            <hr>
+                            <div class="row one-of_books">
+                                <div class="col-md-8">
+                                    <div class="topic_s">ชื่อสถานที่</div>
+                                    <div class="place_name">
+                                        <%=place_name%>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="manage-booking.jsp?place_name=<%=place_name%>">
+                                        <div class="bt bt-booking" >ดูการจอง</div>
+                                    </a>
+                                    <a href="#">
+                                        <div class="bt bt-ads">ลงโฆษณา</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                            <% }%>
+                        </div>       
+                    </div>
                 </div>
             </div>
         </div>
