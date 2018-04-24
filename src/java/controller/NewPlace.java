@@ -73,13 +73,14 @@ public class NewPlace extends HttpServlet {
             String email = request.getParameter("email");
             String owner_name = (String) session.getAttribute("owner");
             Double price_phour = Double.parseDouble(request.getParameter("price_phour"));
+            Double price_pday = Double.parseDouble(request.getParameter("price_pday"));
             String place_address = request.getParameter("place_address");
 
             //section 1 place description insert
             PlaceDescription pd = new PlaceDescription(conn);
             String insertPlaceDescriptionResult = pd.insertNewPlace(place_name, place_featured, place_description,
                     place_status, place_lat, place_lng, place_zone,
-                    phone, email, owner_name, price_phour, place_address);
+                    phone, email, owner_name, price_phour,price_pday, place_address);
             //finish that section 1
 
             //section 2 upload picture

@@ -195,15 +195,88 @@
                                     </div>
                                     <hr class="hr-b">
                                 </div>
-                                <div class="input-grouper">
-                                    <div class="label-input">
-                                        ราคาต่อชั่วโมง (หากไม่มีค่าบริการใส่ 0) <span class="important">*</span>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ราคาต่อชั่วโมง <span class="important">*</span>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่รองรับใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="price_phour">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
                                     </div>
-                                    <div class="">
-                                        <input class="input-box" type="text" name="price_phour">
+                                    <div class="col-md-6">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ราคาต่อวัน <span class="important">*</span>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่รองรับใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="price_pday">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
                                     </div>
-                                    <hr class="hr-b">
+                                    
                                 </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-3">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ความจุ <span class="important"> ยืน *</span><br>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ความจุ <span class="important"> โต๊ะกลม *</span><br>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ความจุ <span class="important"> นั่ง *</span><br>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ความจุ <span class="important"> โต๊ะประชุม *</span><br>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
+                                    </div>
+                                     
+                                    
+                                </div>
+                                
                             </div>
                         </div>
                         <!-- map -->
@@ -240,8 +313,8 @@
                                         <input class="input-box ip2" id="searchTextField" type="text">
                                         <div id="map_canvas"></div>
                                         <div ng-controller="Ctrl">
-                                            <input class="input-box ip2" id="lat" type="text" name = "place_lat" disabled="" placeholder="คำนวณละติจูดอัตโนมัติ" />
-                                            <input class="input-box " id="lng" type="text" disabled="" name="place_lng" placeholder="คำนวณลองติจูดอัตโนมัติ" />
+                                            <input class="input-box ip2" id="lat" type="text" name = "place_lat"  placeholder="คำนวณละติจูดอัตโนมัติ" />
+                                            <input class="input-box " id="lng" type="text" name="place_lng" placeholder="คำนวณลองติจูดอัตโนมัติ" />
                                         </div>
                                         <hr class="hr-b">
                                     </div>

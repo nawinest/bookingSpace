@@ -145,10 +145,10 @@ public class PlaceDescription {
     }
     
     public String insertNewPlace(String place_name, String place_featured, String place_description, String place_status,
-            String place_lat, String place_lng, String place_zone,String phone,String email,String owner_name, Double price_phour,String place_address){
+            String place_lat, String place_lng, String place_zone,String phone,String email,String owner_name, Double price_phour, Double price_pday,String place_address){
         sql = String.format("INSERT INTO place_description (place_name, place_featured, place_description, "
-                    + "place_status,place_lat, place_lng,place_zone,phone,email,owner_name,price_phour,place_address) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%f','%s')",
-                place_name, place_featured, place_description,place_status,place_lat,place_lng,place_zone,phone,email,owner_name,price_phour,place_address);
+                    + "place_status,place_lat, place_lng,place_zone,phone,email,owner_name,price_phour,price_pday,place_address) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%f','%f','%s')",
+                place_name, place_featured, place_description,place_status,place_lat,place_lng,place_zone,phone,email,owner_name,price_phour,price_pday,place_address);
         System.out.println(sql);
         try {
             st.execute(sql);
