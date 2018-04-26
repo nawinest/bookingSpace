@@ -40,7 +40,7 @@ public class Picture {
     }
     public String InsertThePicture(InputStream fileContent, String fileName,String place_name) {
         
-        File targetFile = new File("/Users/mac/Pictures/upload_test/"+fileName);
+        File targetFile = new File("/Users/mac/NetBeansProjects/BookSpace/web/image/"+fileName);
        
 
         byte[] buffer = new byte[8 * 1024];

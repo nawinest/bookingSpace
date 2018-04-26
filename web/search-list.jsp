@@ -4,6 +4,9 @@
     Author     : mac
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.PlaceData"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,10 +24,15 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
         <!-- ///////delete it later -->
     </head>
+    <style>
+        .button-submit:focus{
+            outline:0;
+        }
+    </style>
 
     <body>
         <%@ include file="header-nav.jsp" %>
-
+        <%--<%= request.getAttribute("message") %>--%>
         <div class="container">
             <div class="row" width="100%">
                 <div class="toggle-btn">
@@ -39,75 +47,94 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="hero-search">
+                            <form name="from_search_place" action="searchplace.do" method="get" onsubmit="return validateFormSearch()">
+                                <div class="row">
+                                    <div class="col-md-4">
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="label-search">
+                                        <div>
+                                            <span class="select-wrapper">
+                                                <select class="form-control no-radius" name="search_objective">
+                                                    <option value="any" selected="true"> คุณต้องการทำกิจกรรมอะไร ? </option>
+                                                    <option value="good_meeting">ประชุม </option>
+                                                    <option value="good_seminar">สัมมนา </option>
+                                                    <option value="good_workshop">เวิร์คช็อป </option>
+                                                    <option value="good_openproduct">งานเปิดตัวสินค้า </option>
+                                                    <option value="good_party">ปาร์ตี้ </option>
+                                                    <option value="good_photo">ถ่ายภาพ / บันทึกภาพ </option>
+                                                    <option value="good_concert">มินิคอนเสิร์ต</option>
+                                                </select>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span class="select-wrapper">
-                                            <select class="form-control no-radius">
-                                                <option value="0" disabled="" selected="true"> คุณต้องการทำกิจกรรมอะไร ? </option>
-                                                <option value="1">ประชุม </option>
-                                                <option value="1">สัมมนา </option>
-                                                <option value="1">เวิร์คช็อป </option>
-                                                <option value="1">งานเปิดตัวสินค้า </option>
-                                                <option value="1">ปาร์ตี้ </option>
-                                                <option value="1">ถ่ายภาพ / บันทึกภาพ </option>
-                                                <option value="1">มินิคอนเสิร์ต</option>
-                                            </select>
-                                        </span>
+
+                                    <div class="col-md-4">
+                                        <select class="form-control no-radius" name="search_zone">
+                                            <option value="%">--- Select Area ---</option>
+                                            <option value="Silom - Sathorn">Silom - Sathorn</option>
+                                            <option value="Rama 4 - Lumpini">Rama 4 - Lumpini</option>
+                                            <option value="Chidlom - Ratchadamri">Chidlom - Ratchadamri</option>
+                                            <option value="Asoke - Phrom Phong">Asoke - Phrom Phong</option>
+                                            <option value="Thonglor - Phra Khanong">Thonglor - Phra Khanong</option>
+                                            <option value="Phayathai - Sam Yan">Phayathai - Sam Yan</option>
+                                            <option value="Ratchadaphisek - Huaykwang">Ratchadaphisek - Huaykwang</option>
+                                            <option value="Phetchaburi - Rama 9">Phetchaburi - Rama 9</option>
+                                            <option value="Din Daeng - Ratchaprarop">Din Daeng - Ratchaprarop</option>
+                                            <option value="Ari - Mo Chit">Ari - Mo Chit</option>
+                                            <option value="Vipavadee - Donmuang">Vipavadee - Donmuang</option>
+                                            <option value="Ladprao">Ladprao</option>
+                                            <option value="Sisak - Prachachuen">Sisak - Prachachuen</option>
+                                            <option value="Ratchayothin - New Bridge">Ratchayothin - New Bridge</option>
+                                            <option value="Kaset - Nawamin">Kaset - Nawamin</option>
+                                            <option value="Ngam Wong Wan - Chaengwattana">Ngam Wong Wan - Chaengwattana</option>
+                                            <option value="Watcharapol - Sai Mai">Watcharapol - Sai Mai</option>
+                                            <option value="Ramindra - Suwinthawong">Ramindra - Suwinthawong</option>
+                                            <option value="Rangsit - Pathum Thani">Rangsit - Pathum Thani</option>
+                                            <option value="Rattanathibet - Bangyai">Rattanathibet - Bangyai</option>
+                                            <option value="Ladkrabang - Suvarnabhumi">Ladkrabang - Suvarnabhumi</option>
+                                            <option value="Bangna - Srinakarin">Bangna - Srinakarin</option>
+                                            <option value="Onnut - Punnawithi">Onnut - Punnawithi</option>
+                                            <option value="Udom Suk - Bearing">Udom Suk - Bearing</option>
+                                            <option value="Ramkhamhaeng - Bangkapi">Ramkhamhaeng - Bangkapi</option>
+                                            <option value="Samrong - Thepharak">Samrong - Thepharak</option>
+                                            <option value="Charoenkrung - Rama 3">Charoenkrung - Rama 3</option>
+                                            <option value="Thonburi - Wongwian Yai">Thonburi - Wongwian Yai</option>
+                                            <option value="Talat Phlu - Bang Wa">Talat Phlu - Bang Wa</option>
+                                            <option value="Rama 2 - Ekachai">Rama 2 - Ekachai</option>
+                                            <option value="Charansanitwong">Charansanitwong</option>
+                                            <option value="Ratchaphruek">Ratchaphruek</option>
+                                            <option value="Bangbuathong - Kanchanaphisek">Bangbuathong - Kanchanaphisek</option>
+                                            <option value="Suksawat - Rat Burana">Suksawat - Rat Burana</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div>
+                                            <span class="select-wrapper">
+                                                <select class="form-control no-radius" name="search_people">
+                                                    <option value="0" selected="true"> จำนวนคน </option>
+                                                    <option value="0">0-10 </option>
+                                                    <option value="10">10+ </option>
+                                                    <option value="20">20+ </option>
+                                                    <option value="50">50+ </option>
+                                                    <option value="100">100+ </option>
+
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="margin-top: 0.5em;">
+                                    <div class="col-md-3 align-self-end" style="margin-bottom: -0.6em;">
+                                        <button class="button-submit" type="summit" value="" name="">FIND PLACE !</button>
                                     </div>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <div class="label-search">
-                                    </div>
-                                    <div>
-                                        <span class="select-wrapper">
-                                            <select class="form-control no-radius">
-                                                <option value="0" disabled="" selected="true"> กิจกรรมถูกจัดที่ย่านใด ? </option>
-                                                <option value="1">ประชุม </option>
-                                                <option value="1">สัมมนา </option>
-                                                <option value="1">เวิร์คช็อป </option>
-                                                <option value="1">งานเปิดตัวสินค้า </option>
-                                                <option value="1">ปาร์ตี้ </option>
-                                                <option value="1">ถ่ายภาพ / บันทึกภาพ </option>
-                                                <option value="1">มินิคอนเสิร์ต</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="label-search">
-                                    </div>
-                                    <div>
-                                        <span class="select-wrapper">
-                                            <select class="form-control no-radius">
-                                                <option value="0" disabled="" selected="true"> จำนวนคน </option>
-                                                <option value="1">0-10 </option>
-                                                <option value="1">10+ </option>
-                                                <option value="1">20+ </option>
-                                                <option value="1">50+ </option>
-                                                <option value="1">100+ </option>
-
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row" style="margin-top: 0.5em;">
-                                <div class="col-md-3 align-self-end" style="margin-bottom: -0.6em;">
-                                    <input class="button-submit" type="summit" value="FIND PLACE !" name="">
-                                </div>
-                            </div>
-
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 bottom-hero">
@@ -126,104 +153,31 @@
         </div>
         <div id="tab-1" class="container tab-content current">
             <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                
+                <% 
+                    if (request.getAttribute("searched") != null){ 
+                        ArrayList<PlaceData> list_forShow = (ArrayList<PlaceData>)request.getAttribute("place_all");
+                        for (PlaceData pd : list_forShow){
+                                
+                %>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
                     <div class="show_sponser_1 spon">
                         <div class="show-pic-spon sponpic1">
                         </div>
                         <div class="content-sponser">
-                            <div class="owner_place"><b>Nawin Phunsawat</b> Place ' s owner</div>
-                            <div class="name_place">Novotel Bangkok Ploenchit Sukhumvit</div>
-                            <div class="cost_place"><span class="price_spon"> <b>995 Bath</b></span> per hour</div>
-                            <div class="review_place"><i class="far fa-thumbs-up font-aw"></i> 50 </div>
+                            <div class="owner_place"><b><%= pd.getOwner_name() %></b> Place ' s owner</div>
+                            <div class="name_place"><%= pd.getPlace_name() %></div>
+                            <div class="cost_place"><%= pd.getPrice_pday() %><span class="price_spon"> <b></b></span> per day</div>
+                            
                             <hr>
                             <button class="button-submit-2">Booking</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="show_sponser_1 spon">
-                        <div class="show-pic-spon sponpic1">
-                        </div>
-                        <div class="content-sponser">
-                            <div class="owner_place"><b>Nawin Phunsawat</b> Place ' s owner</div>
-                            <div class="name_place">Novotel Bangkok Ploenchit Sukhumvit</div>
-                            <div class="cost_place"><span class="price_spon"> <b>995 Bath</b></span> per hour</div>
-                            <div class="review_place"><i class="far fa-thumbs-up font-aw"></i> 50 </div>
-                            <hr>
-                            <button class="button-submit-2">Booking</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="show_sponser_1 spon">
-                        <div class="show-pic-spon sponpic1">
-                        </div>
-                        <div class="content-sponser">
-                            <div class="owner_place"><b>Nawin Phunsawat</b> Place ' s owner</div>
-                            <div class="name_place">Novotel Bangkok Ploenchit Sukhumvit</div>
-                            <div class="cost_place"><span class="price_spon"> <b>995 Bath</b></span> per hour</div>
-                            <div class="review_place"><i class="far fa-thumbs-up font-aw"></i> 50 </div>
-                            <hr>
-                            <button class="button-submit-2">Booking</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="show_sponser_1 spon">
-                        <div class="show-pic-spon sponpic1">
-                        </div>
-                        <div class="content-sponser">
-                            <div class="owner_place"><b>Nawin Phunsawat</b> Place ' s owner</div>
-                            <div class="name_place">Novotel Bangkok Ploenchit Sukhumvit</div>
-                            <div class="cost_place"><span class="price_spon"> <b>995 Bath</b></span> per hour</div>
-                            <div class="review_place"><i class="far fa-thumbs-up font-aw"></i> 50 </div>
-                            <hr>
-                            <button class="button-submit-2">Booking</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="show_sponser_1 spon">
-                        <div class="show-pic-spon sponpic1">
-                        </div>
-                        <div class="content-sponser">
-                            <div class="owner_place"><b>Nawin Phunsawat</b> Place ' s owner</div>
-                            <div class="name_place">Novotel Bangkok Ploenchit Sukhumvit</div>
-                            <div class="cost_place"><span class="price_spon"> <b>995 Bath</b></span> per hour</div>
-                            <div class="review_place"><i class="far fa-thumbs-up font-aw"></i> 50 </div>
-                            <hr>
-                            <button class="button-submit-2">Booking</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="show_sponser_1 spon">
-                        <div class="show-pic-spon sponpic1">
-                        </div>
-                        <div class="content-sponser">
-                            <div class="owner_place"><b>Nawin Phunsawat</b> Place ' s owner</div>
-                            <div class="name_place">Novotel Bangkok Ploenchit Sukhumvit</div>
-                            <div class="cost_place"><span class="price_spon"> <b>995 Bath</b></span> per hour</div>
-                            <div class="review_place"><i class="far fa-thumbs-up font-aw"></i> 50 </div>
-                            <hr>
-                            <button class="button-submit-2">Booking</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="show_sponser_1 spon">
-                        <div class="show-pic-spon sponpic1">
-                        </div>
-                        <div class="content-sponser">
-                            <div class="owner_place"><b>Nawin Phunsawat</b> Place ' s owner</div>
-                            <div class="name_place">Novotel Bangkok Ploenchit Sukhumvit</div>
-                            <div class="cost_place"><span class="price_spon"> <b>995 Bath</b></span> per hour</div>
-                            <div class="review_place"><i class="far fa-thumbs-up font-aw"></i> 50 </div>
-                            <hr>
-                            <button class="button-submit-2">Booking</button>
-                        </div>
-                    </div>
-                </div>
+                <% }} %>
+        
+                
+                
             </div>
         </div>
         <div id="tab-2" class="container tab-content">

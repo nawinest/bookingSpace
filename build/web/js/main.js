@@ -34,3 +34,13 @@ $(document).ready(function() {
 $( "#btn-update" ).click(function() {
   alert( "updated !" );
 });
+
+function validateFormSearch() {
+    var search_objective = document.forms["from_search_place"]["search_objective"].value;
+    var search_zone = document.forms["from_search_place"]["search_zone"].value;
+    var search_people = document.forms["from_search_place"]["search_people"].value;
+    if (search_objective == "any") {
+        alert("กรุณาใส่คำค้นหาให้ครบ");
+        return false;
+    }
+}

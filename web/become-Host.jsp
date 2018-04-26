@@ -225,56 +225,81 @@
                                 </div>
                                 <div class="row">
                                     
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="input-grouper">
                                             <div class="label-input">
                                                 ความจุ <span class="important"> ยืน *</span><br>
                                                 <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
                                             </div>
                                             <div class="">
-                                                <input class="input-box" type="text" name="">
+                                                <input class="input-box" type="text" name="stand_capacity">
                                             </div>
                                             <hr class="hr-b">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="input-grouper">
                                             <div class="label-input">
                                                 ความจุ <span class="important"> โต๊ะกลม *</span><br>
                                                 <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
                                             </div>
                                             <div class="">
-                                                <input class="input-box" type="text" name="">
+                                                <input class="input-box" type="text" name="banquat_capacity">
                                             </div>
                                             <hr class="hr-b">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="input-grouper">
                                             <div class="label-input">
                                                 ความจุ <span class="important"> นั่ง *</span><br>
                                                 <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
                                             </div>
                                             <div class="">
-                                                <input class="input-box" type="text" name="">
+                                                <input class="input-box" type="text" name="sit_capacity">
                                             </div>
                                             <hr class="hr-b">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+     
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
                                         <div class="input-grouper">
                                             <div class="label-input">
                                                 ความจุ <span class="important"> โต๊ะประชุม *</span><br>
                                                 <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
                                             </div>
                                             <div class="">
-                                                <input class="input-box" type="text" name="">
+                                                <input class="input-box" type="text" name="meeting_capacity">
                                             </div>
                                             <hr class="hr-b">
                                         </div>
                                     </div>
-                                     
-                                    
+                                    <div class="col-md-4">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ความจุ <span class="important"> ห้องพัก *</span><br>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="room_capacity">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="input-grouper">
+                                            <div class="label-input">
+                                                ความจุ <span class="important"> ที่จอดรถ *</span><br>
+                                                <span class="sub-context" style="font-weight: 200;">ไม่มีใส่ 0</span>
+                                            </div>
+                                            <div class="">
+                                                <input class="input-box" type="text" name="park_capacity">
+                                            </div>
+                                            <hr class="hr-b">
+                                        </div>
+                                    </div>
                                 </div>
                                 
                             </div>

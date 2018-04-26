@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -145,17 +146,35 @@ public class PlaceDescription {
     }
     
     public String insertNewPlace(String place_name, String place_featured, String place_description, String place_status,
-            String place_lat, String place_lng, String place_zone,String phone,String email,String owner_name, Double price_phour, Double price_pday,String place_address){
-        sql = String.format("INSERT INTO place_description (place_name, place_featured, place_description, "
-                    + "place_status,place_lat, place_lng,place_zone,phone,email,owner_name,price_phour,price_pday,place_address) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%f','%f','%s')",
-                place_name, place_featured, place_description,place_status,place_lat,place_lng,place_zone,phone,email,owner_name,price_phour,price_pday,place_address);
-        System.out.println(sql);
+            String place_lat, String place_lng, String place_zone,String phone
+            ,String email,String owner_name, Double price_phour, Double price_pday,String place_address){
+       
         try {
-            st.execute(sql);
+            PreparedStatement pstmt = con.prepareStatement("INSERT INTO place_description (place_name, place_featured, place_description,place_status,place_lat, place_lng,place_zone,phone,email,owner_name,price_phour,price_pday,place_address) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt.setString(1, place_name);
+            pstmt.setString(2, place_featured);
+            pstmt.setString(3, place_description);
+            pstmt.setString(4, place_status);
+            pstmt.setString(5, place_lat);
+            pstmt.setString(6, place_lng);
+            pstmt.setString(7, place_zone);
+            pstmt.setString(8, phone);
+            pstmt.setString(9, email);
+            pstmt.setString(10, owner_name);
+            pstmt.setDouble(11, price_phour);
+            pstmt.setDouble(12, price_pday);
+            pstmt.setString(13, place_address);
+            
+            pstmt.execute();
             return "success";
+            
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(PlaceDescription.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
         //delete
         
