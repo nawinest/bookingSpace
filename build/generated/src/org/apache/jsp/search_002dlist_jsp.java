@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import model.PlaceImage;
+import java.sql.Connection;
 import java.util.ArrayList;
 import model.PlaceData;
 
@@ -48,6 +50,8 @@ public final class search_002dlist_jsp extends org.apache.jasper.runtime.HttpJsp
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -294,41 +298,57 @@ public final class search_002dlist_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("        </div>\n");
       out.write("        <div id=\"tab-1\" class=\"container tab-content current\">\n");
       out.write("            <div class=\"row\">\n");
-      out.write("                \n");
+      out.write("\n");
       out.write("                ");
- 
-                    if (request.getAttribute("searched") != null){ 
-                        ArrayList<PlaceData> list_forShow = (ArrayList<PlaceData>)request.getAttribute("place_all");
-                        for (PlaceData pd : list_forShow){
-                                
+
+                    if (request.getAttribute("searched") != null) {
+                        ArrayList<PlaceData> list_forShow = (ArrayList<PlaceData>) request.getAttribute("place_all");
+                        for (PlaceData pd : list_forShow) {
+
                 
       out.write("\n");
-      out.write("                        <div class=\"col-sm-12 col-md-6 col-lg-4 col-xl-3\">\n");
+      out.write("                <div class=\"col-sm-12 col-md-6 col-lg-4 col-xl-3\">\n");
       out.write("                    <div class=\"show_sponser_1 spon\">\n");
-      out.write("                        <div class=\"show-pic-spon sponpic1\">\n");
+      out.write("                        ");
+                         
+                           ArrayList<PlaceImage> pathImage = pd.getPlace_img();
+                           String pathImage_1 = "";  
+                           PlaceImage pimage = pathImage.get(0);
+                           pathImage_1 = "http://localhost:8080/"+request.getContextPath()+"/image/"+pimage.getImg_name();
+                           System.out.println(pathImage_1);
+                           
+                        
+      out.write("\n");
+      out.write("                        <div class=\"show-pic-spon sponpic1\" style=\"background-image: url('");
+      out.print( pathImage_1 );
+      out.write("')\">\n");
+      out.write("                            \n");
       out.write("                        </div>\n");
       out.write("                        <div class=\"content-sponser\">\n");
       out.write("                            <div class=\"owner_place\"><b>");
-      out.print( pd.getOwner_name() );
+      out.print( pd.getOwner_name());
       out.write("</b> Place ' s owner</div>\n");
       out.write("                            <div class=\"name_place\">");
-      out.print( pd.getPlace_name() );
+      out.print( pd.getPlace_name());
       out.write("</div>\n");
       out.write("                            <div class=\"cost_place\">");
-      out.print( pd.getPrice_pday() );
+      out.print( pd.getPrice_pday());
       out.write("<span class=\"price_spon\"> <b></b></span> per day</div>\n");
-      out.write("                            \n");
+      out.write("\n");
       out.write("                            <hr>\n");
-      out.write("                            <button class=\"button-submit-2\">Booking</button>\n");
+      out.write("                            <a href=\"place.jsp?place_name=");
+      out.print( pd.getPlace_name() );
+      out.write("\"><button class=\"button-submit-2\">See This!</button></a>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
       out.write("                ");
- }} 
+ }
+                    }
       out.write("\n");
-      out.write("        \n");
-      out.write("                \n");
-      out.write("                \n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("        <div id=\"tab-2\" class=\"container tab-content\">\n");

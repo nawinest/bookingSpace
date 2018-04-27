@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author mac
@@ -27,11 +29,35 @@ public class PlaceData {
     private String place_address;
 
     //place img
-    
+    private ArrayList<PlaceImage> place_img;
 
-    
-    public PlaceData(){}
-        
+    //place appropriate
+    private boolean good_meeting;
+    private boolean good_seminar;
+    private boolean good_workshop;
+    private boolean good_openproduct;
+    private boolean good_party;
+    private boolean good_photo;
+    private boolean good_concert;
+
+    //place Capacity
+    private double stand_capacity;
+    private double banquat_capacity;
+    private double sit_capacity;
+    private double meeting_capacity;
+    private double park_capacity;
+    private double room_capacity;
+
+    //place type
+    private boolean isHotel;
+    private boolean isConference;
+    private boolean isRestaurant;
+    private boolean isCoworking;
+    private boolean isOthers;
+
+    public PlaceData() {
+    }
+
     public void SetPlaceData(String place_name,
             String place_featured,
             String place_description,
@@ -44,9 +70,28 @@ public class PlaceData {
             String owner_name,
             double price_phour,
             double price_pday,
-            String place_address
-            ) {
-        
+            String place_address,
+            ArrayList<PlaceImage> place_img,
+            boolean good_meeting, // begin appropriate
+            boolean good_sminar,
+            boolean good_workshop,
+            boolean good_openproduct,
+            boolean good_party,
+            boolean good_photo,
+            boolean good_concert,
+            double stand_capacity, // begin capacity
+            double banquat_capacity,
+            double sit_capacity,
+            double meeting_capacity,
+            double park_capacity,
+            double room_capacity,
+            boolean isHotel, //begin type
+            boolean isConference,
+            boolean isRestaurant,
+            boolean isCoworking,
+            boolean isOthers
+    ) {
+
         //set place_description obj
         this.place_name = place_name;
         this.place_description = place_description;
@@ -61,10 +106,33 @@ public class PlaceData {
         this.price_phour = price_phour;
         this.price_pday = price_pday;
         this.place_address = place_address;
-        
-        //set place obj
-//        this.img_id = img_id;
-//        this.img_name = img_name;
+
+        //set place_image
+        this.place_img = place_img;
+
+        //set place appropriate
+        this.good_meeting = good_meeting;
+        this.good_seminar = good_seminar;
+        this.good_workshop = good_workshop;
+        this.good_openproduct = good_openproduct;
+        this.good_party = good_party;
+        this.good_photo = good_photo;
+        this.good_concert = good_concert;
+
+        //set place capacity
+        this.stand_capacity = stand_capacity;
+        this.banquat_capacity = banquat_capacity;
+        this.sit_capacity = sit_capacity;
+        this.meeting_capacity = meeting_capacity;
+        this.park_capacity = park_capacity;
+        this.room_capacity = room_capacity;
+
+        //set type
+        this.isHotel = isHotel;
+        this.isConference = isConference;
+        this.isRestaurant = isRestaurant;
+        this.isCoworking = isCoworking;
+        this.isOthers = isOthers;
 
     }
 
@@ -94,6 +162,150 @@ public class PlaceData {
 
     public String getPlace_status() {
         return place_status;
+    }
+
+    public boolean isGood_meeting() {
+        return good_meeting;
+    }
+
+    public void setGood_meeting(boolean good_meeting) {
+        this.good_meeting = good_meeting;
+    }
+
+    public boolean isGood_seminar() {
+        return good_seminar;
+    }
+
+    public void setGood_seminar(boolean good_seminar) {
+        this.good_seminar = good_seminar;
+    }
+
+    public boolean isGood_workshop() {
+        return good_workshop;
+    }
+
+    public void setGood_workshop(boolean good_workshop) {
+        this.good_workshop = good_workshop;
+    }
+
+    public boolean isGood_openproduct() {
+        return good_openproduct;
+    }
+
+    public void setGood_openproduct(boolean good_openproduct) {
+        this.good_openproduct = good_openproduct;
+    }
+
+    public boolean isGood_party() {
+        return good_party;
+    }
+
+    public void setGood_party(boolean good_party) {
+        this.good_party = good_party;
+    }
+
+    public boolean isGood_photo() {
+        return good_photo;
+    }
+
+    public void setGood_photo(boolean good_photo) {
+        this.good_photo = good_photo;
+    }
+
+    public boolean isGood_concert() {
+        return good_concert;
+    }
+
+    public void setGood_concert(boolean good_concert) {
+        this.good_concert = good_concert;
+    }
+
+    public double getStand_capacity() {
+        return stand_capacity;
+    }
+
+    public void setStand_capacity(double stand_capacity) {
+        this.stand_capacity = stand_capacity;
+    }
+
+    public double getBanquat_capacity() {
+        return banquat_capacity;
+    }
+
+    public void setBanquat_capacity(double banquat_capacity) {
+        this.banquat_capacity = banquat_capacity;
+    }
+
+    public double getSit_capacity() {
+        return sit_capacity;
+    }
+
+    public void setSit_capacity(double sit_capacity) {
+        this.sit_capacity = sit_capacity;
+    }
+
+    public double getMeeting_capacity() {
+        return meeting_capacity;
+    }
+
+    public void setMeeting_capacity(double meeting_capacity) {
+        this.meeting_capacity = meeting_capacity;
+    }
+
+    public double getPark_capacity() {
+        return park_capacity;
+    }
+
+    public void setPark_capacity(double park_capacity) {
+        this.park_capacity = park_capacity;
+    }
+
+    public double getRoom_capacity() {
+        return room_capacity;
+    }
+
+    public void setRoom_capacity(double room_capacity) {
+        this.room_capacity = room_capacity;
+    }
+
+    public boolean isIsHotel() {
+        return isHotel;
+    }
+
+    public void setIsHotel(boolean isHotel) {
+        this.isHotel = isHotel;
+    }
+
+    public boolean isIsConference() {
+        return isConference;
+    }
+
+    public void setIsConference(boolean isConference) {
+        this.isConference = isConference;
+    }
+
+    public boolean isIsRestaurant() {
+        return isRestaurant;
+    }
+
+    public void setIsRestaurant(boolean isRestaurant) {
+        this.isRestaurant = isRestaurant;
+    }
+
+    public boolean isIsCoworking() {
+        return isCoworking;
+    }
+
+    public void setIsCoworking(boolean isCoworking) {
+        this.isCoworking = isCoworking;
+    }
+
+    public boolean isIsOthers() {
+        return isOthers;
+    }
+
+    public void setIsOthers(boolean isOthers) {
+        this.isOthers = isOthers;
     }
 
     public void setPlace_status(String place_status) {
@@ -144,6 +356,14 @@ public class PlaceData {
         return owner_name;
     }
 
+    public ArrayList<PlaceImage> getPlace_img() {
+        return place_img;
+    }
+
+    public void setPlace_img(ArrayList<PlaceImage> place_img) {
+        this.place_img = place_img;
+    }
+
     public void setOwner_name(String owner_name) {
         this.owner_name = owner_name;
     }
@@ -171,7 +391,5 @@ public class PlaceData {
     public void setPlace_address(String place_address) {
         this.place_address = place_address;
     }
-
-   
 
 }

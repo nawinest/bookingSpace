@@ -4,6 +4,8 @@
     Author     : mac
 --%>
 
+<%@page import="model.PlaceImage"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.PlaceData"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -153,31 +155,41 @@
         </div>
         <div id="tab-1" class="container tab-content current">
             <div class="row">
-                
-                <% 
-                    if (request.getAttribute("searched") != null){ 
-                        ArrayList<PlaceData> list_forShow = (ArrayList<PlaceData>)request.getAttribute("place_all");
-                        for (PlaceData pd : list_forShow){
-                                
+
+                <%
+                    if (request.getAttribute("searched") != null) {
+                        ArrayList<PlaceData> list_forShow = (ArrayList<PlaceData>) request.getAttribute("place_all");
+                        for (PlaceData pd : list_forShow) {
+
                 %>
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
                     <div class="show_sponser_1 spon">
-                        <div class="show-pic-spon sponpic1">
+                        <%                         
+                           ArrayList<PlaceImage> pathImage = pd.getPlace_img();
+                           String pathImage_1 = "";  
+                           PlaceImage pimage = pathImage.get(0);
+                           pathImage_1 = "http://localhost:8080/"+request.getContextPath()+"/image/"+pimage.getImg_name();
+                           System.out.println(pathImage_1);
+                           
+                        %>
+                        <div class="show-pic-spon sponpic1" style="background-image: url('<%= pathImage_1 %>')">
+                            
                         </div>
                         <div class="content-sponser">
-                            <div class="owner_place"><b><%= pd.getOwner_name() %></b> Place ' s owner</div>
-                            <div class="name_place"><%= pd.getPlace_name() %></div>
-                            <div class="cost_place"><%= pd.getPrice_pday() %><span class="price_spon"> <b></b></span> per day</div>
-                            
+                            <div class="owner_place"><b><%= pd.getOwner_name()%></b> Place ' s owner</div>
+                            <div class="name_place"><%= pd.getPlace_name()%></div>
+                            <div class="cost_place"><%= pd.getPrice_pday()%><span class="price_spon"> <b></b></span> per day</div>
+
                             <hr>
-                            <button class="button-submit-2">Booking</button>
+                            <a href="place.jsp?place_name=<%= pd.getPlace_name() %>"><button class="button-submit-2">See This!</button></a>
                         </div>
                     </div>
                 </div>
-                <% }} %>
-        
-                
-                
+                <% }
+                    }%>
+
+
+
             </div>
         </div>
         <div id="tab-2" class="container tab-content">
