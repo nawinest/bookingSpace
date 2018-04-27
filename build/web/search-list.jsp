@@ -181,7 +181,7 @@
                             <div class="cost_place"><%= pd.getPrice_pday()%><span class="price_spon"> <b></b></span> per day</div>
 
                             <hr>
-                            <a href="place.jsp?place_name=<%= pd.getPlace_name() %>"><button class="button-submit-2">See This!</button></a>
+                            <a href="place_query.do?place_name=<%= pd.getPlace_name() %>"><button class="button-submit-2">See This!</button></a>
                         </div>
                     </div>
                 </div>

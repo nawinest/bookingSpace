@@ -4,6 +4,7 @@
     Author     : mac
 --%>
 
+<%@page import="model.PlaceData"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,10 @@
 
     <body>
         <%@ include file="header-nav.jsp" %>
+        
+        <% PlaceData pd_rs = (PlaceData)request.getAttribute("data_set"); 
+            System.out.println(pd_rs);
+        %>
         <div class="container content-wrap">
             <div class="content">
                 <div class="pic-place">
@@ -56,7 +61,7 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <span class="district-place"> 129 พระราม 9 แขวง ห้วยขวาง เขต ห้วยขวาง Bangkok 10310 </span>
+                                    <span class="district-place"> <%= pd_rs.getPlace_address() %> </span>
                                     <h2>Apartment 1 of 4 with green terrace in Roma Nort</h2>
                                 </div>
                             </div>

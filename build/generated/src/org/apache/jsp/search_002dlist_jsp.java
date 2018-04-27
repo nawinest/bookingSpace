@@ -336,7 +336,7 @@ public final class search_002dlist_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("<span class=\"price_spon\"> <b></b></span> per day</div>\n");
       out.write("\n");
       out.write("                            <hr>\n");
-      out.write("                            <a href=\"place.jsp?place_name=");
+      out.write("                            <a href=\"place_query.do?place_name=");
       out.print( pd.getPlace_name() );
       out.write("\"><button class=\"button-submit-2\">See This!</button></a>\n");
       out.write("                        </div>\n");
