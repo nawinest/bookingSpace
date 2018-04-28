@@ -178,6 +178,8 @@
                         <div class="content-sponser">
                             <div class="owner_place"><b><%= pd.getOwner_name()%></b> Place ' s owner</div>
                             <div class="name_place"><%= pd.getPlace_name()%></div>
+                            <div class="address_place"><i class="fas fa-map-marker-alt"></i> <%= pd.getPlace_address() %></div>
+                            
                             <div class="cost_place"><%= pd.getPrice_pday()%><span class="price_spon"> <b></b></span> per day</div>
 
                             <hr>

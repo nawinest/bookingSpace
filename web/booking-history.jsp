@@ -4,6 +4,12 @@
     Author     : mac
 --%>
 
+<%@page import="model.BookingData"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Booking"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Place"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +29,16 @@
 
     <body>
         <%@ include file="header-nav.jsp" %>
+        <%
+            ServletContext sc = getServletContext();
+            Connection conn = (Connection) sc.getAttribute("conn");
+            Booking bk = new Booking(conn);
 
+            String username_user = (String) session.getAttribute("username");
+            ArrayList<BookingData> bk_set = bk.queryBookingAll_User(username);
+
+
+        %>
         <div class="line-separate"></div>
         <div class="container">
             <div class="row">
@@ -34,48 +49,41 @@
                     </li>
                 </ol>
                 <div class="col-lg-10 offset-lg-1">
+                    <% for (BookingData bk_data : bk_set) {%>
                     <div class="row ticket-info ticket-warp">
-                        <div class="col-sm-12 col-md-6 img-tab">
-                            <div>
-                                <img class="logo_place" src="https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2017/whatisspacet.jpg">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <h3 class="place-name"> NapLab : Co-working Space</h3>
+                        
+                        <div class="col-sm-12">
+                            <h3 class="place-name"> <%= bk_data.getPlace_name()%> </h3>
+                            <a class="txt-b" href="place_query.do?place_name=<%= bk_data.getPlace_name()%>"><i class="far fas fa-map-marker-alt"></i> คลิกดูรายละเอียดสถานที่ </a>
+
                             <hr>
-                            <p class="ticket-full-price">ฟรี</p>
-                            <p class="ticket-buyer-name">Nawin Phunsawat</p>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="label"> ราคารวม </div>
+                                    <p class="ticket-full-price"><%= bk_data.getCost()%></p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="label"> เวลาที่ทำการจอง </div>
+                                    <p class="ticket-booking-time"><%= bk_data.getBooking_time() %></p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="label"> สถานะการจอง : <span><%= bk_data.getStatus_accept_booking() %></span></div>
+                                </div>
+                            </div>
+                            
+                            <!--<p class="ticket-buyer-name"><%= session.getAttribute("name") %></p>-->
                             <div class="place-info">
-                                <a class="txt-b" href="#"><i class="far fa-calendar-alt"></i> 24 มีนาคม 2018 | 12:00</a>
+                                <i class="far fa-calendar-alt"></i> <%= bk_data.getTime_checkin() %> - <%= bk_data.getTime_checkout() %>
                                 <br>
-                                <a class="txt-b" href="#"><i class="far fas fa-map-marker-alt"></i> C. P. Tower, Silom, Bang Rak, Bangkok, Thailand </a>
+                                <i class="far fas fa-map-marker-alt"></i> <%= bk_data.getBooking_description() %>
                             </div>
                             <div class="manage-btn">
                                 <button class="btn-can">Cancel</button>
                             </div>
                         </div>
                     </div>
-                    <div class="row ticket-info ticket-warp">
-                        <div class="col-sm-12 col-md-6 img-tab">
-                            <div>
-                                <img class="logo_place" src="https://www.jpl.nasa.gov/images/nustar/20171030/nustar20171030-16.jpg">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <h3 class="place-name"> NapLab : Co-working Space</h3>
-                            <hr>
-                            <p class="ticket-full-price">ฟรี</p>
-                            <p class="ticket-buyer-name">Nawin Phunsawat</p>
-                            <div class="place-info">
-                                <a class="txt-b" href="#"><i class="far fa-calendar-alt"></i> 24 มีนาคม 2018 | 12:00</a>
-                                <br>
-                                <a class="txt-b" href="#"><i class="far fas fa-map-marker-alt"></i> C. P. Tower, Silom, Bang Rak, Bangkok, Thailand </a>
-                            </div>
-                            <div class="manage-btn">
-                                <button class="btn-can">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
+                    <%}%>
+
                 </div>
             </div>
             <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

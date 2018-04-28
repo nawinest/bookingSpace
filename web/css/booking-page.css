@@ -15,7 +15,10 @@ body {
     background-color: white;
     border-radius: 10px;
     padding: 2em;
+    
+
 }
+
 
 
 .topper-topic{
@@ -25,4 +28,52 @@ body {
 
 .from-group{
 	margin-bottom: 1em;
+}
+
+.date-picker{
+	margin-bottom: 1em;
+}
+
+.book_button{
+	padding: 1em;
+	width: 100%;
+	text-align: center;
+	border: none;
+	color: white;
+	background-color: #e237a0;
+}
+
+.book_button:hover{
+	cursor: pointer;
+}
+.book_button:focus{
+	outline: none;
+}
+
+
+.img-credit{
+	width: 20%;
+}
+
+
+.priceall{
+    font-weight: 200;
+    
+}
+
+.pclass{
+    display: inline-block;
+    color:white;
+    margin-right: 1em;
+    padding: 7px;
+    background: #e237a0;
+    border-radius: 5px;
+}
+
+.from-booking{
+    margin-top : 1em;
+}
+
+.nav-tabs .nav-link.active{
+    color:#e237a0;
 }

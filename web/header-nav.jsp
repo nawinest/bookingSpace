@@ -30,7 +30,7 @@
                         </button>
                         <div class="dropdown-menu">
                             <h5 class="dropdown-header nav-logged">เกี่ยวกับคุณ</h5>
-                            <a class="dropdown-item nav-logged" href="#">ประวัติการจอง</a>
+                            <a class="dropdown-item nav-logged" href="booking-history.jsp">ประวัติการจอง</a>
                             <a class="dropdown-item nav-logged" href="edit-profile.jsp">แก้ไขโปรไฟล์</a>
                             <a class="dropdown-item nav-logged" href="logout.do">ออกจากระบบ</a>
                             

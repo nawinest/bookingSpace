@@ -163,15 +163,20 @@ margin: 0 auto;
 }
 
 .price-label{
-	border-radius: 10px;
-	background-color: #e237a010;
+	/*border-radius: 10px;*/
+	/*background-color: #e237a010;*/
 	text-align: center;
 	padding-top: 2em;
 	padding-bottom: 2em;
+        border: 1px solid #e237a0;
 }
 .price-all{
 	font-size: 32px;
 	margin-bottom: -10px;
+}
+.price_label_cost{
+    color: #e237a0;
+    font-size:32px;
 }
 .policy{
 	font-size: 0.5em;
@@ -195,4 +200,18 @@ margin: 0 auto;
 }
 .topic_s{
 	color: #e237a0;
+}
+
+.open_cl{
+   color: white;
+   padding :5px;
+   background-color :green;
+   border-radius: 5px;
+}
+
+.close_cl{
+   color: white;
+   padding :5px;
+   background-color :red;
+   border-radius: 5px;
 }

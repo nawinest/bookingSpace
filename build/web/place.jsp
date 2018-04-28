@@ -1,9 +1,11 @@
-<%-- 
+    <%-- 
     Document   : place
     Created on : Apr 16, 2018, 2:28:22 PM
     Author     : mac
 --%>
 
+<%@page import="model.PlaceImage"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.PlaceData"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,8 +26,8 @@
 
     <body>
         <%@ include file="header-nav.jsp" %>
-        
-        <% PlaceData pd_rs = (PlaceData)request.getAttribute("data_set"); 
+
+        <% PlaceData pd_rs = (PlaceData) request.getAttribute("data_set");
             System.out.println(pd_rs);
         %>
         <div class="container content-wrap">
@@ -33,15 +35,18 @@
                 <div class="pic-place">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                         <div class="carousel-inner content-pic">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="asset/place/1.jpeg" alt="First slide">
+                            <% ArrayList<PlaceImage> place_img = pd_rs.getPlace_img(); 
+                                for (int i = 0;i<place_img.size();i++){
+                                    String act = "";
+                                    if(i == 0){
+                                        act = "active";
+                                    }
+                            %>
+                            <div class="carousel-item <%= act %>">
+                                <img class="d-block w-100" src="<%= "http://localhost:8080/"+request.getContextPath()+"/image/"+place_img.get(i).getImg_name() %>" alt="">
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="asset/place/2.jpg" alt="Second slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="asset/place/3.jpg" alt="Third slide">
-                            </div>
+           
+                            <% } %>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -61,13 +66,26 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <span class="district-place"> <%= pd_rs.getPlace_address() %> </span>
-                                    <h2>Apartment 1 of 4 with green terrace in Roma Nort</h2>
+                                    <span class="district-place"> <%= pd_rs.getPlace_address()%> </span>
+                                    <h2><%= pd_rs.getPlace_name()%></h2>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div>Status <span class="status"> มีห้องว่าง </span></div>
+                                    <div>Status <span class="status <%= pd_rs.getPlace_status()+"_cl"%>"> <%= pd_rs.getPlace_status()%> </span></div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="label-des"> รายละเอียดของสถานที่ </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="short-descript-place">
+                                                <%= pd_rs.getPlace_description()%>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -77,33 +95,34 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="short-descript-place">
-                                                เป็นสถานที่ใจกลางเมือง อยู่ใกล้ bts สถานีสยาม
+                                                <%= pd_rs.getPlace_featured()%>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <hr>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="label-des"> สิ่งอำนวยความสะดวก </div>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="ament-wifi amentities"><i class="fas fa-wifi"></i> wifi : <span class="haveable"> yes </span></div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="ament-food amentities"><i class="fas fa-utensils"></i> อาหาร : <span class="haveable"> yes </span></div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="ament-parking amentities"><i class="fas fa-car"></i> ที่จอดรถ : <span class="haveable"> yes </span></div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="ament-room amentities"><i class="fas fa-bed"></i> ห้องพัก : <span class="haveable"> yes </span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
+                            <!--                            <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="label-des"> สิ่งอำนวยความสะดวก </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-3">
+                                                                        <div class="ament-wifi amentities"><i class="fas fa-wifi"></i> wifi : <span class="haveable"> yes </span></div>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <div class="ament-food amentities"><i class="fas fa-utensils"></i> อาหาร : <span class="haveable"> yes </span></div>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <div class="ament-parking amentities"><i class="fas fa-car"></i> ที่จอดรถ : <span class="haveable"> yes </span></div>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <div class="ament-room amentities"><i class="fas fa-bed"></i> ห้องพัก : <span class="haveable"> yes </span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                            <!--<hr>-->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="label-des"> ตำแหน่งของสถานที่ </div>
@@ -137,19 +156,19 @@
                                             <div class="tocenter">
                                                 <div class="icon standing-icon" width="40px" height="40px" data-toggle="tooltip" data-placement="top" title="ยืน"><span class=""></span></div>
                                             </div>
-                                            <div class="size">20</div>
+                                            <div class="size"><%= pd_rs.getStand_capacity()%></div>
                                         </div>
                                         <div class="col-sm-3 capacity-info">
                                             <div class="icon banquat-icon" width="40px" height="40px" data-toggle="tooltip" data-placement="top" title="โต๊ะกลมงานเลี้ยง"><span class=""></span></div>
-                                            <div class="size">20</div>
+                                            <div class="size"><%= pd_rs.getBanquat_capacity()%></div>
                                         </div>
                                         <div class="col-sm-3 capacity-info">
                                             <div class="icon theator-icon" width="40px" height="40px" data-toggle="tooltip" data-placement="top" title="Theator"><span class=""></span></div>
-                                            <div class="size">20</div>
+                                            <div class="size"><%= pd_rs.getMeeting_capacity()%></div>
                                         </div>
                                         <div class="col-sm-3 capacity-info">
                                             <div class="icon board-icon" width="40px" height="40px" data-toggle="tooltip" data-placement="top" title="บอร์ดการประชุม"><span class=""></span></div>
-                                            <div class="size">20</div>
+                                            <div class="size"><%= pd_rs.getSit_capacity()%></div>
                                         </div>
                                     </div>
                                 </div>
@@ -213,14 +232,19 @@
                                     <div class="price">
                                         <div class="price-label">
                                             <div>
-                                                <span class="price-all"> 800฿ / per hour</span>
+                                               
+                                                <% if(pd_rs.getPrice_pday() > 0){ %>
+                                                <span class="price_label_cost"> <%= pd_rs.getPrice_pday()%> </span>
+                                                <%}%>
                                                 <br>
                                                 <span class="policy">ต่อชั่วโมง | ค่าเช่าสถานที่เท่านั้น • ขั้นต่ำ 4 ชั่วโมง</span>
                                             </div>
                                         </div>
                                         <hr>
                                     </div>
-                                    <a href="">
+                                                
+                                       
+                                    <a href="createbooking_page.do?place_name=<%= pd_rs.getPlace_name() %>">
                                         <button class="booking-button">จองพื้นที่ <i class="fas fa-angle-double-right"></i></button>
                                     </a>
                                 </div>
@@ -232,7 +256,7 @@
         </div>
     </div>
     <div class="booking-2 fixed-lean">
-        <a href="">
+        <a href="createbooking_page.do?place_name=<%=  pd_rs.getPlace_name() %>">
             <button class="booking-button-buttom">จองพื้นที่
                 <br><i class="fas fa-angle-double-right"></i></button>
         </a>
@@ -241,6 +265,8 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/place.js"></script>
+    <%@include file="setMap.jsp" %>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXS40rABuuIrWI7ks0h-1NxNTp7BReXbg&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>

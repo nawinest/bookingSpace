@@ -170,3 +170,12 @@ select.form-control {
     background-position: 100% 50%;
     background-repeat: no-repeat;
 }
+
+
+.address_place i{
+    color: #e237a0;
+}
+
+.address_place{
+    font-size: 0.5em;
+}
