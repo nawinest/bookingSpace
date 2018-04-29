@@ -49,6 +49,7 @@ public class Provider {
                     + "phone,email, address,owner) VALUES ('%s','%s','%s','%s','%s','%s','%s')",
                 username, password, idCard,phone,email,address,owner);
             st.execute(sql);
+            st.close();
            return  true;
         } catch (SQLException ex) {
             Logger.getLogger(Provider.class.getName()).log(Level.SEVERE, null, ex);

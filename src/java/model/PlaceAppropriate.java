@@ -60,6 +60,7 @@ public class PlaceAppropriate {
             if(good_concert!=null){pstmt.setBoolean(7, true);}
           
             pstmt.execute();
+            pstmt.close();
             return true;
             
             

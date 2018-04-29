@@ -4,6 +4,10 @@
     Author     : mac
 --%>
 
+<%@page import="model.Booking"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.BookingData"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,6 +29,16 @@
     <body>
         
          <%@ include file="header-nav.jsp" %>
+         <%
+            ServletContext sc = getServletContext();
+            Connection conn = (Connection) sc.getAttribute("conn");
+            Booking bk = new Booking(conn);
+
+            String username_user = (String) session.getAttribute("username");
+            ArrayList<BookingData> bk_set = bk.queryBookingAll_User(username);
+
+
+        %>
         <div class="container content-wrap">
             <div class="content">
                 <div class="main-topic">

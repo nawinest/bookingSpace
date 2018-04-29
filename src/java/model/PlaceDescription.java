@@ -167,6 +167,7 @@ public class PlaceDescription {
             pstmt.setString(13, place_address);
             
             pstmt.execute();
+            pstmt.close();
             return "success";
             
             

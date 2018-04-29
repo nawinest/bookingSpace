@@ -66,7 +66,9 @@ public class Members {
             }
             st.close();
             if (isMember) {
+                
                 return "member";
+                
             } else {
                 return "none";
             }
@@ -86,6 +88,7 @@ public class Members {
             st.executeUpdate(sql);
             this.name = firstName + " " + lastName;
             this.phone = phone;
+            st.close();
             return "updated";
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,6 +104,7 @@ public class Members {
                     +username+"','"+password+"','"+fname+"','"+
                     lname+"','"+email+"','"+phone+"',"+balance+")";
             st.execute(sql);
+            st.close();
             return "success";
         } catch (SQLException ex) {
             Logger.getLogger(Members.class.getName()).log(Level.SEVERE, null, ex);

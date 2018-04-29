@@ -51,12 +51,17 @@
                 <div class="col-lg-10 offset-lg-1">
                     <% for (BookingData bk_data : bk_set) {%>
                     <div class="row ticket-info ticket-warp">
-                        
+
                         <div class="col-sm-12">
-                            <h3 class="place-name"> <%= bk_data.getPlace_name()%> </h3>
+                            <h3 class="place-name">การจองหมายเลข <span style="color:#ec0186;">#<%= bk_data.getBooking_id()%></span></h3>
                             <a class="txt-b" href="place_query.do?place_name=<%= bk_data.getPlace_name()%>"><i class="far fas fa-map-marker-alt"></i> คลิกดูรายละเอียดสถานที่ </a>
 
                             <hr>
+                            <div class="row" style="margin-bottom:1em;">
+                                <div class="col-sm-12">
+                                    ชื่อสถานที่ : <%= bk_data.getPlace_name()%>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="label"> ราคารวม </div>
@@ -64,21 +69,45 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="label"> เวลาที่ทำการจอง </div>
-                                    <p class="ticket-booking-time"><%= bk_data.getBooking_time() %></p>
+                                    <p class="ticket-booking-time"><%= bk_data.getBooking_time().substring(0, bk_data.getBooking_time().length() - 2)%></p>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="label"> สถานะการจอง : <span><%= bk_data.getStatus_accept_booking() %></span></div>
+                                    <div class="label"> สถานะการจอง  
+                                        <p><span <% if (bk_data.getStatus_accept_booking().equals("not_accept")) { %> style="color:red;" <%} else {%> style="color:green" <%}%>>
+                                                <%= bk_data.getStatus_accept_booking()%>
+                                            </span></p>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <!--<p class="ticket-buyer-name"><%= session.getAttribute("name") %></p>-->
-                            <div class="place-info">
-                                <i class="far fa-calendar-alt"></i> <%= bk_data.getTime_checkin() %> - <%= bk_data.getTime_checkout() %>
-                                <br>
-                                <i class="far fas fa-map-marker-alt"></i> <%= bk_data.getBooking_description() %>
+                            <div class="purchase_status">
+                                สถานะการชำระเงิน : 
+                                <% if (bk_data.getStatus_accept_booking().equals("not_accept")) { %>
+                                <span style="color:red;font-size:0.8em;">กรุณารอการอนุมัติจากเจ้าของสถานที่</span>
+                                <% } else if (bk_data.getStatus_payment().equals("yes")) {%>
+                                <span style="color:red;font-size:0.8em;">ชำระเงินแล้ว</span>
+                                <div class="warning-info" style="font-size:0.65em;">คำเตือนหากท่านกด Cancel หรือยกเลิกท่านจะไม่สามารถได้รับเงินคืน</div>
+
+                                <% } else {%>
+                                <span style="color:red;font-size:0.8em;">ยังไม่ได้ชำระเงิน</span>
+                                <%}%>
                             </div>
+                            <!--<p class="ticket-buyer-name"><%= session.getAttribute("name")%></p>-->
+
+                            <div class="place-info">
+                       
+                                <i class="far fa-calendar-alt"></i> <%= bk_data.getTime_checkin().substring(0, bk_data.getTime_checkin().length() - 2)%> - <%= bk_data.getTime_checkout().substring(0, bk_data.getTime_checkout().length() - 2)%>
+                                <br>
+                            </div>
+                                
+                            <% if (bk_data.getStatus_payment().equals("no") && bk_data.getStatus_accept_booking().equals("accept")) {%>
+                            <a href="payment-page.jsp?booking_id=<%= bk_data.getBooking_id()%>"> <button class="booking_payment">คลิกเข้าสู่หน้าชำระเงิน</button></a>
+                            <% } %>
+                            
+
                             <div class="manage-btn">
-                                <button class="btn-can">Cancel</button>
+                                <a href="deletebooking.do?delete=true&booking_id=<%=bk_data.getBooking_id()%>">
+                                    <button class="btn-can2" >Cancel</button>
+                                </a>
                             </div>
                         </div>
                     </div>

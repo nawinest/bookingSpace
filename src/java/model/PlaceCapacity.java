@@ -47,6 +47,7 @@ public class PlaceCapacity {
             pstmt.setDouble(6, room_capacity);
             pstmt.setString(7, place_name);
             pstmt.execute();
+            pstmt.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(PlaceCapacity.class.getName()).log(Level.SEVERE, null, ex);

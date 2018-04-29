@@ -52,6 +52,7 @@ public class PlaceType {
             }
             System.out.println(pstmt.toString());
             pstmt.execute();
+            pstmt.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(PlaceType.class.getName()).log(Level.SEVERE, null, ex);

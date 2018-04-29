@@ -33,7 +33,7 @@ public class Place {
 
         try {
             st = con.createStatement();
-            st2 = con.createStatement();
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -51,8 +51,9 @@ public class Place {
             while (rs.next()) {
                 String place_name = rs.getString("place_name");
                 listName_place.add(place_name);
-
+                
             }
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(Place.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -143,6 +144,7 @@ public class Place {
                 pd_set.add(pd);
 
             }
+            st.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(Place.class
@@ -156,8 +158,10 @@ public class Place {
         String sql = "select * from place_description join place_picture using(place_name) where place_name = '" + place_name + "'";
 //        System.out.println(sql2);
         ArrayList<PlaceImage> pd_img = new ArrayList<PlaceImage>();
+        
         try {
 //            ResultSet rs2 = st2.execute(sql2);
+            st2 = con.createStatement();
             ResultSet rs = st2.executeQuery(sql);
 
             while (rs.next()) {
@@ -168,6 +172,7 @@ public class Place {
                 pd_img.add(pi);
 
             }
+            st2.close();
         } catch (SQLException ex) {
             Logger.getLogger(Place.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -240,6 +245,7 @@ public class Place {
                 
                 return pd_result;
             }
+            st.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(Place.class.getName()).log(Level.SEVERE, null, ex);

@@ -67,11 +67,13 @@ public class BookingServlet extends HttpServlet {
                 String booking_description = request.getParameter("event_description");
                 String username = (String)session.getAttribute("username");
                 String place_name = (String)session.getAttribute("place_name");
+                int people = Integer.parseInt(request.getParameter("people"));
 
                 
                 Booking bk = new Booking(conn);
                 String rs_bk = bk.insertBooking(booking_time, status_accept_booking, name_of_customer
-                        , time_checkin, status_payment, time_checkout, cost, booking_description, username, place_name);
+                        , time_checkin, status_payment, time_checkout
+                        , cost, booking_description, username, place_name,people);
                 if (rs_bk.equals("success")){
                     response.sendRedirect("booking-history.jsp");
                 }
@@ -93,10 +95,13 @@ public class BookingServlet extends HttpServlet {
                 String booking_description = request.getParameter("event_description");
                 String username = (String)session.getAttribute("username");
                 String place_name = (String)session.getAttribute("place_name");
+                int people = Integer.parseInt(request.getParameter("people"));
                 Booking bk = new Booking(conn);
                 
+                
                 String rs_bk = bk.insertBooking(booking_time, status_accept_booking, name_of_customer
-                        , time_checkin, status_payment, time_checkout, cost, booking_description, username, place_name);
+                        , time_checkin, status_payment, time_checkout, cost
+                        , booking_description, username, place_name,people);
                 if (rs_bk.equals("success")){
                     response.sendRedirect("booking-history.jsp");
                 }

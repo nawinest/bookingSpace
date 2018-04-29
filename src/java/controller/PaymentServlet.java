@@ -1,17 +1,15 @@
-package controller;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,22 +17,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Members;
+import model.Payment;
 
 /**
  *
  * @author mac
  */
-@WebServlet(urlPatterns = {"/login.do"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "PaymentServlet", urlPatterns = {"/payment.do"})
+public class PaymentServlet extends HttpServlet {
 
     private Connection conn;
-    
     private ServletContext sc;
-    private String sql;
-    private String username;
-    private String password;
-  
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,34 +41,33 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             sc = getServletContext();
             conn = (Connection) sc.getAttribute("conn");
-            username = request.getParameter("username");
-            password = request.getParameter("password");
-            Members mb = new Members(conn);
+            HttpSession session = request.getSession();
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentDate = df.format(c.getTime());
+
             
-            if (mb.queryMember(username, password).equals("member")){
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                session.setAttribute("password", password);
-                session.setAttribute("name", mb.getName());
-                session.setAttribute("phone", mb.getPhone());
-                session.setAttribute("email", mb.getEmail());
-                session.setAttribute("logged", true);
-                
-                response.sendRedirect("index.jsp");
+            String time_payment = currentDate;
+            String place_name = request.getParameter("place_name");
+            double cost = Double.parseDouble(request.getParameter("cost"));
+            String username_ref = (String) session.getAttribute("username");
+            int booking_id = Integer.parseInt(request.getParameter("booking_id"));
+            Payment pm = new Payment(conn);
+            
+            String resultPayment = pm.insertDataPayment(time_payment, place_name, cost, username_ref, booking_id);
+            if(resultPayment.equals("success")){
+                String update_result = pm.updateStatusPayment(booking_id);
+                if(update_result.equals("success")){
+                    response.sendRedirect("operation_result.jsp");
+                }
             }
-            else{
-                response.sendRedirect("login-error.jsp");
-            }
-            
-            System.out.println("login - it working");
-            
-            
-            
-            
+
         }
     }
 

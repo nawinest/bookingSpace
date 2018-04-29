@@ -69,6 +69,7 @@ public class Picture {
         String sql  = "insert into place_picture (img_name,place_name)values('"+fileName+"', '"+place_name+"')";
         try {
             st.execute(sql);
+            st.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(Picture.class.getName()).log(Level.SEVERE, null, ex);

@@ -22,6 +22,7 @@ public class BookingData {
     private String booking_description;
     private String username;
     private String place_name;
+    private int people;
 
     public BookingData() {
 
@@ -38,7 +39,9 @@ public class BookingData {
             Double cost,
             String booking_description,
             String username,
-            String place_name){
+            String place_name,
+            int people
+    ){
         
         this.booking_id = booking_id;
         this.booking_time = booking_time;
@@ -46,11 +49,21 @@ public class BookingData {
         this.name_of_customer = name_of_customer;
         this.time_checkin = time_checkin;
         this.time_checkout = time_checkout;
+        this.status_payment = status_payment;
         this.cost = cost;
         this.booking_description = booking_description;
         this.username = username;
         this.place_name = place_name;
+        this.people = people;
         
+    }
+
+    public int getPeople() {
+        return people;
+    }
+
+    public void setPeople(int people) {
+        this.people = people;
     }
 
     public int getBooking_id() {
