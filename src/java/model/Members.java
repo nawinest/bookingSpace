@@ -98,7 +98,7 @@ public class Members {
     }
     
     public String insertMember(String username ,String password, String fname, String lname , String email,String phone , Double balance){
-        System.out.println(username+ password+ fname+ lname+ email+ phone+ balance);
+        System.out.println(username+"-"+ password+"-"+ fname+"-"+ lname+"-"+ email+"-"+ phone+"-"+balance);
         try {
             sql = "INSERT INTO member (username, password, firstName,lastName, phone,email,balance) VALUES ('"
                     +username+"','"+password+"','"+fname+"','"+

@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BOOKSPACE.COM</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/booking-page.css">
@@ -31,7 +31,9 @@
         <%@ include file="header-nav.jsp" %>
         <%
             PlaceData pd_rs = (PlaceData) request.getAttribute("data_set");
-
+            if (session.getAttribute("logged") == null) {
+                response.sendRedirect("comment_error.jsp");
+            }
         %>
 
 

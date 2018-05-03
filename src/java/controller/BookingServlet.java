@@ -50,61 +50,61 @@ public class BookingServlet extends HttpServlet {
             sc = getServletContext();
             conn = (Connection) sc.getAttribute("conn");
             HttpSession session = request.getSession();
+            if (session.getAttribute("logged") != null) {
+                if (request.getParameter("type").equals("day")) {
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String currentDate = df.format(c.getTime());
 
-            if (request.getParameter("type").equals("day")) {
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String currentDate = df.format(c.getTime());
-                
-                
-                String booking_time = currentDate;
-                String status_accept_booking = "not_accept";
-                String name_of_customer = (String)session.getAttribute("name");
-                String time_checkin = request.getParameter("start-time")+" 00:00:00";
-                String status_payment = "no";
-                String time_checkout = request.getParameter("end-time")+" 23:59:59";
-                Double cost  = (double)session.getAttribute("cost_pday");
-                String booking_description = request.getParameter("event_description");
-                String username = (String)session.getAttribute("username");
-                String place_name = (String)session.getAttribute("place_name");
-                int people = Integer.parseInt(request.getParameter("people"));
+                    String booking_time = currentDate;
+                    String status_accept_booking = "not_accept";
+                    String name_of_customer = (String) session.getAttribute("name");
+                    String time_checkin = request.getParameter("start-time") + " 00:00:00";
+                    String status_payment = "no";
+                    String time_checkout = request.getParameter("end-time") + " 23:59:59";
+                    Double cost = (double) session.getAttribute("cost_pday");
+                    String booking_description = request.getParameter("event_description");
+                    String username = (String) session.getAttribute("username");
+                    String place_name = (String) session.getAttribute("place_name");
+                    int people = Integer.parseInt(request.getParameter("people"));
 
-                
-                Booking bk = new Booking(conn);
-                String rs_bk = bk.insertBooking(booking_time, status_accept_booking, name_of_customer
-                        , time_checkin, status_payment, time_checkout
-                        , cost, booking_description, username, place_name,people);
-                if (rs_bk.equals("success")){
-                    response.sendRedirect("booking-history.jsp");
+                    Booking bk = new Booking(conn);
+                    String rs_bk = bk.insertBooking(booking_time, status_accept_booking, name_of_customer,
+                             time_checkin, status_payment, time_checkout,
+                             cost, booking_description, username, place_name, people);
+                    if (rs_bk.equals("success")) {
+                        response.sendRedirect("booking-history.jsp");
+                    }
+
+                } else if (request.getParameter("type").equals("hour")) {
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String currentDate = df.format(c.getTime());
+                    String daypicker = request.getParameter("daypicker");
+
+                    String booking_time = currentDate;
+                    String status_accept_booking = "not_accept";
+                    String name_of_customer = (String) session.getAttribute("name");
+                    String time_checkin = daypicker + " " + request.getParameter("start-time");
+                    String status_payment = "no";
+                    String time_checkout = daypicker + " " + request.getParameter("end-time");
+                    Double cost = (double) session.getAttribute("cost_phour");
+                    String booking_description = request.getParameter("event_description");
+                    String username = (String) session.getAttribute("username");
+                    String place_name = (String) session.getAttribute("place_name");
+                    int people = Integer.parseInt(request.getParameter("people"));
+                    Booking bk = new Booking(conn);
+
+                    String rs_bk = bk.insertBooking(booking_time, status_accept_booking, name_of_customer,
+                             time_checkin, status_payment, time_checkout, cost,
+                             booking_description, username, place_name, people);
+                    if (rs_bk.equals("success")) {
+                        response.sendRedirect("booking-history.jsp");
+                    }
                 }
-                
             }
-            else if(request.getParameter("type").equals("hour")){
-                 Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String currentDate = df.format(c.getTime());
-                String daypicker = request.getParameter("daypicker");
-                
-                String booking_time = currentDate;
-                String status_accept_booking = "not_accept";
-                String name_of_customer = (String)session.getAttribute("name");
-                String time_checkin = daypicker +" " + request.getParameter("start-time");
-                String status_payment = "no";
-                String time_checkout = daypicker +" " +request.getParameter("end-time");
-                Double cost  = (double)session.getAttribute("cost_phour");
-                String booking_description = request.getParameter("event_description");
-                String username = (String)session.getAttribute("username");
-                String place_name = (String)session.getAttribute("place_name");
-                int people = Integer.parseInt(request.getParameter("people"));
-                Booking bk = new Booking(conn);
-                
-                
-                String rs_bk = bk.insertBooking(booking_time, status_accept_booking, name_of_customer
-                        , time_checkin, status_payment, time_checkout, cost
-                        , booking_description, username, place_name,people);
-                if (rs_bk.equals("success")){
-                    response.sendRedirect("booking-history.jsp");
-                }
+            else{
+                response.sendRedirect("index.jsp");
             }
         }
     }

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,10 +18,11 @@ import java.util.logging.Logger;
  * @author mac
  */
 public class Provider {
+
     private Connection conn;
     private Statement st;
     private String sql;
-    
+
     private String username;
     private String password;
     private String idCard;
@@ -28,38 +30,40 @@ public class Provider {
     private String email;
     private String address;
     private String owner;
-    
-    public Provider(Connection conn){
+    private String provider_status;
+
+    ArrayList<ProviderData> array_provider_data = new ArrayList<ProviderData>();
+
+    public Provider(Connection conn) {
         this.conn = conn;
         try {
             st = conn.createStatement();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-                
+
     }
-    
+
     public Provider() {
     }
-    
-    public boolean insertNewProvider(String username, String password, String idCard , String phone,String email, String address, String owner){
-        
+
+    public boolean insertNewProvider(String username, String password, String idCard, String phone, String email, String address, String owner, String provider_status) {
+
         try {
             sql = String.format("INSERT INTO providers (username, password, idCard, "
-                    + "phone,email, address,owner) VALUES ('%s','%s','%s','%s','%s','%s','%s')",
-                username, password, idCard,phone,email,address,owner);
+                    + "phone,email, address,owner,provider_status) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')",
+                    username, password, idCard, phone, email, address, owner, provider_status);
             st.execute(sql);
             st.close();
-           return  true;
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(Provider.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
-   
-    
-    public String checkIsProvider(String username_input, String password_input){
+
+    public String checkIsProvider(String username_input, String password_input) {
         try {
             sql = "SELECT * FROM providers";
             ResultSet rs = st.executeQuery(sql);
@@ -74,9 +78,14 @@ public class Provider {
                     this.idCard = rs.getString("idCard");
                     this.phone = rs.getString("phone");
                     this.email = rs.getString("email");
-                    isProvider = true;
-                    break;
-
+                    this.provider_status = rs.getString("provider_status");
+                    if (rs.getString("provider_status").equals("approve")) {
+                        isProvider = true;
+                        break;
+                    } else {
+                        isProvider = false;
+                        break;
+                    }
                 } else {
                     isProvider = false;
                 }
@@ -91,20 +100,61 @@ public class Provider {
         } catch (SQLException ex) {
             return ex + "";
         }
-        
+
     }
 
-    
-    
-    public void queryProvider(){
-        
+    public ArrayList<ProviderData> queryProviderForAdmin() {
+        sql = "select * from providers order by provider_status  desc,owner";
+        try {
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String idCard = rs.getString("idCard");
+                String phone = rs.getString("phone");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String owner = rs.getString("owner");
+                String provider_status = rs.getString("provider_status");
+                
+                ProviderData provider_data = new ProviderData();
+                provider_data.setProviderData(username, password, idCard, phone, email, address, owner, provider_status);
+                
+                array_provider_data.add(provider_data);
+            }
+            st.close();
+            return array_provider_data;
+        } catch (SQLException ex) {
+            Logger.getLogger(Provider.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return array_provider_data;
+
     }
     
-    
-    
-    
-    
-    
+    public String updateStatus_provider(String username){
+        sql = "update providers set provider_status = 'approve' where username = '"+username+"'";
+        try {
+            st.execute(sql);
+            st.close();
+            return "success";
+        } catch (SQLException ex) {
+            Logger.getLogger(Provider.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "none";
+    }
+
+    public String getProvider_status() {
+        return provider_status;
+    }
+
+    public void setProvider_status(String provider_status) {
+        this.provider_status = provider_status;
+    }
+
+    public void queryProvider() {
+
+    }
+
     public String getUsername() {
         return username;
     }

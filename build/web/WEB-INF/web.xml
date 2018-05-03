@@ -16,4 +16,11 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <resource-ref>
+        <description>jdbc:mysql://tomcat.it.kmitl.ac.th:3306/webpro_20_dev?zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;useEncoding=true&amp;characterEncoding=UTF-8</description>
+        <res-ref-name>webpro_20_dev</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
 </web-app>

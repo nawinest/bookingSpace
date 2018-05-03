@@ -1,0 +1,33 @@
+.topnav{
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.button-signout{
+    padding : 10px;
+    border-radius: 5px;
+    border:none;
+}
+
+
+.buttom-wrap{
+    margin-bottom: 0.75em;
+
+}
+
+.content200{
+    font-weight: 200;
+
+}
+
+.content{
+
+}
+
+.des{
+    font-weight: 200;
+}
+
+tbody{
+    font-weight: 200; 
+}

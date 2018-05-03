@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BOOKSPACE.COM</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/place.css">
@@ -59,7 +59,7 @@
                                     <a href="manage-booking.jsp?place_name=<%=place_name%>">
                                         <div class="bt bt-booking" >ดูการจอง</div>
                                     </a>
-                                    <a href="#">
+                                    <a href="buy_advertise.jsp?place_name=<%=place_name%>">
                                         <div class="bt bt-ads">ลงโฆษณา</div>
                                     </a>
                                 </div>

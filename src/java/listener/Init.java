@@ -27,7 +27,7 @@ public class Init implements ServletContextListener {
     public void contextInitialized(ServletContextEvent arg0) {
         try {
             try {
-                conn = getBookSpace().getConnection();
+                conn = getWebpro_20_dev().getConnection();
                 arg0.getServletContext().setAttribute("conn", conn);
                 
             } catch (Exception e) {
@@ -47,8 +47,15 @@ public class Init implements ServletContextListener {
         }
     }
 
-    private DataSource getBookSpace() throws NamingException {
+//    private DataSource getBookSpace() throws NamingException {
+//        Context c = new InitialContext();
+//        return (DataSource) c.lookup("java:comp/env/bookSpace");
+//    }
+
+    private DataSource getWebpro_20_dev() throws NamingException {
         Context c = new InitialContext();
-        return (DataSource) c.lookup("java:comp/env/bookSpace");
+        return (DataSource) c.lookup("java:comp/env/webpro_20_dev");
     }
+    
+    
 }

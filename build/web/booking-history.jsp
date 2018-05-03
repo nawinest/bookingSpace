@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BOOKSPACE.COM</title>
         <link rel="stylesheet" type="text/css" href="css/bookingpage_style.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -82,7 +82,7 @@
                             <div class="purchase_status">
                                 สถานะการชำระเงิน : 
                                 <% if (bk_data.getStatus_accept_booking().equals("not_accept")) { %>
-                                <span style="color:red;font-size:0.8em;">กรุณารอการอนุมัติจากเจ้าของสถานที่</span>
+                                <span style="color:red;font-size:0.8em">กรุณารอการอนุมัติจากเจ้าของสถานที่</span>
                                 <% } else if (bk_data.getStatus_payment().equals("yes")) {%>
                                 <span style="color:red;font-size:0.8em;">ชำระเงินแล้ว</span>
                                 <div class="warning-info" style="font-size:0.65em;">คำเตือนหากท่านกด Cancel หรือยกเลิกท่านจะไม่สามารถได้รับเงินคืน</div>

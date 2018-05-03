@@ -40,8 +40,8 @@ public class Picture {
     }
     public String InsertThePicture(InputStream fileContent, String fileName,String place_name) {
         
-        File targetFile = new File("/Users/mac/NetBeansProjects/BookSpace/web/image/"+fileName);
-       
+//        File targetFile = new File("/Users/mac/NetBeansProjects/BookSpace/web/image/"+fileName);
+        File targetFile = new File("/usr/local/tomcat/webapps/image/"+fileName);
 
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;

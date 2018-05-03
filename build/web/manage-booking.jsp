@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BOOKSPACE.COM</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/place.css">
@@ -27,54 +27,71 @@
     </head>
 
     <body>
-        
-         <%@ include file="header-nav.jsp" %>
-         <%
+
+        <%@ include file="header-nav.jsp" %>
+        <%
             ServletContext sc = getServletContext();
             Connection conn = (Connection) sc.getAttribute("conn");
+            String place_name = request.getParameter("place_name");
             Booking bk = new Booking(conn);
-
-            String username_user = (String) session.getAttribute("username");
-            ArrayList<BookingData> bk_set = bk.queryBookingAll_User(username);
-
-
+            ArrayList<BookingData> bk_set = bk.queryBookingAll_Place(place_name);
         %>
         <div class="container content-wrap">
             <div class="content">
                 <div class="main-topic">
-                    <h3>Your booking table : ร้านสตาร์บัค</h3>
+                    <h3>Your booking table : <%= place_name%></h3>
                     <a href="manage-place.jsp">
                         <button class="btn btn-danger"> <i class="fas fa-caret-left"></i> กลับสู่หน้าจัดการสถานที่ </button>
                     </a>
                     <hr>
                 </div>
                 <div class="show_all_booking">
+                    <% for (BookingData bk_data : bk_set) {%>
                     <div class="booking">
-                        <div class="label-top" style="color: red;">การจองหมายเลข #44422</div>
+                        <div class="label-top" style="color: red;">การจองหมายเลข #<%= bk_data.getBooking_id()%></div>
                         <div class="row one-of_books">
                             <div class="col-md-2">
                                 <div class="label">ชื่อผู้จอง</div>
-                                <div class="contenter">Jonatan ticktok</div>
+                                <div class="contenter"><%= bk_data.getName_of_customer()%></div>
                             </div>
                             <div class="col-md-2">
-                                <div class="label">วันที่จอง</div>
-                                <div class="contenter">31-มีนาคม-2554</div>
+                                <div class="label">สถานะการชำระเงิน</div>
+                                <div class="contenter">
+                                    <% if (bk_data.getStatus_accept_booking().equals("not_accept")) { %>
+                                    <span style="color:red;font-size:1em;">กรุณารอการอนุมัติจากเจ้าของสถานที่</span>
+                                    <% } else if (bk_data.getStatus_payment().equals("yes")) {%>
+                                    <span style="color:red;font-size:1em;">ชำระเงินแล้ว</span>
+                                    <% } else {%>
+                                    <span style="color:red;font-size:1em;">ยังไม่ได้ชำระเงิน</span>
+                                    <%}%>
+                                </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="label">จำนวนชั่วโมง</div>
-                                <div class="contenter">4</div>
+                                <div class="label">ช่วงเวลาที่จอง</div>
+                                <div class="contenter"><%= bk_data.getTime_checkin().substring(0, bk_data.getTime_checkin().length() - 2)%> <br>ถึง <%= bk_data.getTime_checkout().substring(0, bk_data.getTime_checkout().length() - 2)%> </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="label">จำนวนคน</div>
-                                <div class="contenter">14</div>
+                                <div class="contenter"><%= bk_data.getPeople()%></div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="label">รายละเอียดการจอง</div>
-                                <div class="contenter">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                <div class="contenter"><%= bk_data.getBooking_description()%></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="label">สถานะการจอง</div>
+                                <div class="contenter">
+                                    <% if( bk_data.getStatus_accept_booking().equals("accept") ){ %>
+                                    <span style="color:green;font-size:1.2em;">accept</span>
+                                    <% } else{%>
+                                    <a href="approvebooking.do?booking_id=<%= bk_data.getBooking_id()%>"><button class="btn btn-warning" >คลิกเพื่ออนุมัติ</button></a>
+                                    <% } %>    
+                                </div>
                             </div>
                         </div>
                         <hr>
                     </div>
+                    <% }%>
                 </div>
             </div>
             <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

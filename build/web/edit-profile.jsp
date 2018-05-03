@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title> BOOKSPACE.COM </title>
         <link rel="stylesheet" type="text/css" href="css/edit-profile-page.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="nav flex-column col-md-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link custom-tab active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true">แก้ไขรายละเอียดโปรไฟล์</a>
-                        <a class="nav-link custom-tab" id="v-pills-picture-tab" data-toggle="pill" href="#v-pills-picture" role="tab" aria-controls="v-pills-picture" aria-selected="false">แก้ไขรูปโปรไฟล์</a>
+                        
                     </div>
                     <div class="tab-content col-md-9" id="v-pills-tabContent">
                         <div class="tab-pane fade show active editprofile" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -54,6 +54,13 @@
 
                                 <form action="update.do" method="post">
                                     <div class="from-wrap">
+                                        <div class="form-group row">
+                                            <label for="staticEmail" class="col-sm-2 col-form-label">ชื่อ</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-control-plaintext" id="staticEmail"><%= session.getAttribute("name")%></div>
+                                                <!--<div class="opa-1">ในส่วนของอีเมลของท่านไม่สามารถแก้ไขได้</div>-->
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-10">
@@ -87,29 +94,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-picture" role="tabpanel" aria-labelledby="v-pills-picture-tab">
-                            <div class="header-top">
-                                แก้ไขรูปโปรไฟล์
-                            </div>
-                            <hr>
-                            <div class="upload">
-                                <!-- <form method="POST" enctype="multipart/form-data" id="uploadForm"></form> -->
-                                <div id="uploadForm" class="avatar-preview">
-                                    <img src="asset/web/user.png" class="avatar-preview">
-                                </div>
-
-
-                                <input type="file" name="file" id="file">
-                                <div class="button-change">
-                                    <button type="submit" class="choosefile" onclick="document.getElementById('file').click()">Choose your picture</button>
-                                </div>
-
-                                <div class="warning"> ขนาดรูปควรเป็นจัตุรัส</div>
-                                <div class="b-wrap">
-                                    <input class="edit" type="submit" name="edit-profile-pic" value="Edit">
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -119,11 +104,8 @@
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <script> 
-            $( "#btn-update" ).click(function() {
-                alert( "updated !" );
-        });</script>
-        <script type="text/javascript" src="js/edit-profile.js"></script>
+       
+        <!--<script type="text/javascript" src="js/edit-profile.js"></script>-->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXS40rABuuIrWI7ks0h-1NxNTp7BReXbg&libraries=places&callback=initMap" async defer></script>
     </body>
 </html>

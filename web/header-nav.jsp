@@ -12,7 +12,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BOOKSPACE.COM</title>
 
     </head>
     <body>
@@ -53,7 +53,6 @@
                             <a class="dropdown-item nav-logged" href="become-Host.jsp">ลงสถานที่ของคุณ</a>
                             <a class="dropdown-item nav-logged" href="manage-place.jsp">จัดการสถานที่</a>
       
-                            <a class="dropdown-item nav-logged" href="edit-profile.jsp">ลงโฆษณา</a>
                             <a class="dropdown-item nav-logged" href="logout.do">ออกจากระบบ</a>
                         </div>
                     </div>

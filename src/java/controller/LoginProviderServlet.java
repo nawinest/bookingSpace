@@ -62,6 +62,7 @@ public class LoginProviderServlet extends HttpServlet {
             session.setAttribute("address", pv.getAddress());
             session.setAttribute("owner", pv.getOwner());
             session.setAttribute("role", "provider");
+            session.setAttribute("provider_status", pv.getProvider_status());
             System.out.println(pv.getOwner());
             response.sendRedirect("manage-place.jsp");
         } else {

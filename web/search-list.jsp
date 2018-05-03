@@ -4,6 +4,7 @@
     Author     : mac
 --%>
 
+<%@page import="model.Place"%>
 <%@page import="model.PlaceImage"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.ArrayList"%>
@@ -14,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BOOKSPACE.COM</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/stylelogin.css">
@@ -149,13 +150,12 @@
             <div class="navigator-tab">
                 <ul class="tabs">
                     <li class="tab-link current" data-tab="tab-1">ดูแบบลิสต์</li>
-                    <li class="tab-link" data-tab="tab-2">ดูผ่านแผนที่</li>
+                    
                 </ul>
             </div>
         </div>
         <div id="tab-1" class="container tab-content current">
             <div class="row">
-
                 <%
                     if (request.getAttribute("searched") != null) {
                         ArrayList<PlaceData> list_forShow = (ArrayList<PlaceData>) request.getAttribute("place_all");
@@ -164,31 +164,69 @@
                 %>
                 <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
                     <div class="show_sponser_1 spon">
-                        <%                         
-                           ArrayList<PlaceImage> pathImage = pd.getPlace_img();
-                           String pathImage_1 = "";  
-                           PlaceImage pimage = pathImage.get(0);
-                           pathImage_1 = "http://localhost:8080/"+request.getContextPath()+"/image/"+pimage.getImg_name();
-                           System.out.println(pathImage_1);
-                           
+                        <%                            ArrayList<PlaceImage> pathImage = pd.getPlace_img();
+                            String pathImage_1 = "";
+                            PlaceImage pimage = pathImage.get(0);
+//                            pathImage_1 = "http://localhost:8080/" + request.getContextPath() + "/image/" + pimage.getImg_name();
+                            pathImage_1 = "http://group20.tomcat.it.kmitl.ac.th//image/"+ pimage.getImg_name();
+                            System.out.println(pathImage_1);
+
                         %>
-                        <div class="show-pic-spon sponpic1" style="background-image: url('<%= pathImage_1 %>')">
-                            
+                        <div class="show-pic-spon sponpic1" style="background-image: url('<%= pathImage_1%>')">
+
                         </div>
                         <div class="content-sponser">
                             <div class="owner_place"><b><%= pd.getOwner_name()%></b> Place ' s owner</div>
                             <div class="name_place"><%= pd.getPlace_name()%></div>
-                            <div class="address_place"><i class="fas fa-map-marker-alt"></i> <%= pd.getPlace_address() %></div>
-                            
+                            <div class="address_place"><i class="fas fa-map-marker-alt"></i> <%= pd.getPlace_address()%></div>
+
                             <div class="cost_place"><%= pd.getPrice_pday()%><span class="price_spon"> <b></b></span> per day</div>
 
                             <hr>
-                            <a href="place_query.do?place_name=<%= pd.getPlace_name() %>"><button class="button-submit-2">See This!</button></a>
+                            <a href="place_query.do?place_name=<%= pd.getPlace_name()%>"><button class="button-submit-2">See This!</button></a>
                         </div>
                     </div>
                 </div>
                 <% }
-                    }%>
+                } else {%>
+                <%
+                    ServletContext sc = getServletContext();
+                    Connection conn = (Connection) sc.getAttribute("conn");
+                    Place place = new Place(conn);
+                    ArrayList<PlaceData> place_set = place.queryPlaceSponser();
+                    for (PlaceData pd : place_set) {
+
+                %>
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                    <div class="show_sponser_1 spon">
+                        <%  ArrayList<PlaceImage> pathImage = pd.getPlace_img();
+                            String pathImage_1 = "";
+                            PlaceImage pimage = pathImage.get(0);
+//                            pathImage_1 = "http://localhost:8080/" + request.getContextPath() + "/image/" + pimage.getImg_name();
+                            pathImage_1 = "http://group20.tomcat.it.kmitl.ac.th//image/"+ pimage.getImg_name();
+                            System.out.println(pathImage_1);
+
+                        %>
+                        <div class="show-pic-spon sponpic1" style="background-image: url('<%= pathImage_1%>')">
+
+                        </div>
+                        <div class="content-sponser">
+                            <div class="owner_place"><b><%= pd.getOwner_name()%></b> Place ' s owner</div>
+                            <div class="name_place"><%= pd.getPlace_name()%></div>
+                            <div class="address_place"><i class="fas fa-map-marker-alt"></i> <%= pd.getPlace_address()%></div>
+
+                            <div class="cost_place"><%= pd.getPrice_pday()%><span class="price_spon"> <b></b></span> per day</div>
+
+                            <hr>
+                            <a href="place_query.do?place_name=<%= pd.getPlace_name()%>"><button class="button-submit-2">See This!</button></a>
+                        </div>
+                    </div>
+                </div>
+                <% }%>
+
+
+
+                <%}%>
 
 
 
@@ -202,7 +240,7 @@
             </div>
         </div>
         <!-- footer -->
-        <div class="footer-nw">
+<!--        <div class="footer-nw">
             <div class="sub-bg-footer">
                 <div class="container">
                     <div class="col-12">
@@ -219,7 +257,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>

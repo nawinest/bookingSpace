@@ -40,6 +40,9 @@ public class UpdateProfile extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             sc = getServletContext();
@@ -59,7 +62,11 @@ public class UpdateProfile extends HttpServlet {
             session.setAttribute("phone", phone_new);
             session.setAttribute("logged", true);
             session.setAttribute("update", "updated");
-            response.sendRedirect("edit-profile.jsp");
+            
+            
+            if(rs_update.equals("updated")){
+                response.sendRedirect("update_profile_success.jsp");
+            }
             
 
         }

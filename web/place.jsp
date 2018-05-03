@@ -1,9 +1,12 @@
-    <%-- 
-    Document   : place
-    Created on : Apr 16, 2018, 2:28:22 PM
-    Author     : mac
+<%-- 
+Document   : place
+Created on : Apr 16, 2018, 2:28:22 PM
+Author     : mac
 --%>
 
+<%@page import="model.CommentData"%>
+<%@page import="model.Comment"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="model.PlaceImage"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.PlaceData"%>
@@ -12,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>BOOKSPACE.COM</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/place.css">
@@ -35,18 +38,19 @@
                 <div class="pic-place">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                         <div class="carousel-inner content-pic">
-                            <% ArrayList<PlaceImage> place_img = pd_rs.getPlace_img(); 
-                                for (int i = 0;i<place_img.size();i++){
+                            <% ArrayList<PlaceImage> place_img = pd_rs.getPlace_img();
+                                for (int i = 0; i < place_img.size(); i++) {
                                     String act = "";
-                                    if(i == 0){
+                                    if (i == 0) {
                                         act = "active";
                                     }
                             %>
-                            <div class="carousel-item <%= act %>">
-                                <img class="d-block w-100" src="<%= "http://localhost:8080/"+request.getContextPath()+"/image/"+place_img.get(i).getImg_name() %>" alt="">
+                            <div class="carousel-item <%= act%>">
+                                <!--<img class="d-block w-100" src="<%= "http://localhost:8080/" + request.getContextPath() + "/image/" + place_img.get(i).getImg_name()%>" alt="">-->
+                                <img class="d-block w-100" src="<%= "http://group20.tomcat.it.kmitl.ac.th//image/" + place_img.get(i).getImg_name()%>" alt="">
                             </div>
-           
-                            <% } %>
+
+                            <% }%>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -72,7 +76,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div>Status <span class="status <%= pd_rs.getPlace_status()+"_cl"%>"> <%= pd_rs.getPlace_status()%> </span></div>
+                                    <div>Status <span class="status <%= pd_rs.getPlace_status() + "_cl"%>"> <%= pd_rs.getPlace_status()%> </span></div>
                                 </div>
                             </div>
                             <hr>
@@ -182,11 +186,13 @@
                                             <label for="comment">Comment:</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <form>
+                                            <form action="comment.do" method="post">
                                                 <div class="form-group no-margin-bottom">
-                                                    <textarea class="form-control" rows="5" id="comment" placeholder="กรุณาแสดงความคิดเห็นอย่างสุภาพ"></textarea>
+                                                    <textarea class="form-control" rows="5" name="comment_description" id="comment" placeholder="กรุณาแสดงความคิดเห็นอย่างสุภาพ"></textarea>
                                                 </div>
-                                                <div class="comment-button">Comment !</div>
+                                                <input type="hidden" name ="place_name" value="<%= pd_rs.getPlace_name()%>">
+                                                <!--<div class="comment-button">Comment !</div>-->
+                                                <button class="comment-button" type="submit">แสดงความคิดเห็น </button>
                                             </form>
                                         </div>
                                     </div>
@@ -195,31 +201,25 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="label-des"> ความคิดเห็น </div>
+                                    <div class="label-des"> ความคิดจากสมาชิก </div>
+                                    <%
+                                        ServletContext sc = getServletContext();
+                                        Connection conn = (Connection) sc.getAttribute("conn");
+                                        Comment cd = new Comment(conn);
+                                        ArrayList<CommentData> cd_set = cd.queryAllCommentOfPlace(pd_rs.getPlace_name());
+                                        for (CommentData comment_data : cd_set){
+                                    %>
                                     <div class="row comment-wrap">
-                                        <div class="col-sm-2">
-                                            <div class="pic-profile-wrap">
-                                                <img class="user-photo" src="asset/web/user.png">
-                                            </div>
-                                        </div>
                                         <div class="col-sm-10">
-                                            <h6 class="name_user">สมชาย ขนดก</h6>
-                                            <p class="comment">สมชายว่ามันดีมากๆ เลยครับ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <h6 class="name_user"><%= comment_data.getName() %></h6>
+                                            <p class="comment">โพสตเมื่อ <%= comment_data.getTimecomment() %></p>
+                                            <p class="comment" style='font-size:0.9em;'><%= comment_data.getComment_description() %></p>
                                             <hr>
                                         </div>
                                     </div>
-                                    <div class="row comment-wrap">
-                                        <div class="col-sm-2">
-                                            <div class="pic-profile-wrap">
-                                                <img class="user-photo" src="asset/web/user.png">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <h6 class="name_user">สมชาย ขนดก</h6>
-                                            <p class="comment">สมชายว่ามันดีมากๆ เลยครับ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                            <hr>
-                                        </div>
-                                    </div>
+                                    
+                                    <%}%>
+
 
                                 </div>
                             </div>
@@ -229,22 +229,10 @@
                         <div class="col-md-4">
                             <div class="booking">
                                 <div class="booking-in">
-                                    <div class="price">
-                                        <div class="price-label">
-                                            <div>
-                                               
-                                                <% if(pd_rs.getPrice_pday() > 0){ %>
-                                                <span class="price_label_cost"> <%= pd_rs.getPrice_pday()%> </span>
-                                                <%}%>
-                                                <br>
-                                                <span class="policy">ต่อชั่วโมง | ค่าเช่าสถานที่เท่านั้น • ขั้นต่ำ 4 ชั่วโมง</span>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                                
-                                       
-                                    <a href="createbooking_page.do?place_name=<%= pd_rs.getPlace_name() %>">
+                                    
+
+
+                                    <a href="createbooking_page.do?place_name=<%= pd_rs.getPlace_name()%>">
                                         <button class="booking-button">จองพื้นที่ <i class="fas fa-angle-double-right"></i></button>
                                     </a>
                                 </div>
@@ -256,7 +244,7 @@
         </div>
     </div>
     <div class="booking-2 fixed-lean">
-        <a href="createbooking_page.do?place_name=<%=  pd_rs.getPlace_name() %>">
+        <a href="createbooking_page.do?place_name=<%=  pd_rs.getPlace_name()%>">
             <button class="booking-button-buttom">จองพื้นที่
                 <br><i class="fas fa-angle-double-right"></i></button>
         </a>

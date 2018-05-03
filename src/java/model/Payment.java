@@ -38,10 +38,12 @@ public class Payment {
         try {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, time_payment);
-            pstmt.setString(1, place_name);
-            pstmt.setDouble(1, cost);
-            pstmt.setString(1, username_ref);
-            pstmt.setInt(1, booking_id);
+            pstmt.setString(2, place_name);
+            pstmt.setDouble(3, cost);
+            pstmt.setString(4, username_ref);
+            pstmt.setInt(5, booking_id);
+            
+            pstmt.execute();
             pstmt.close();
             return "success";
         } catch (SQLException ex) {

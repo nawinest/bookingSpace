@@ -58,11 +58,13 @@ public class SignUpProviderServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             String owner = request.getParameter("owner");
-            System.out.println(owner + "vvvv");
             String address = request.getParameter("address");
-            Boolean insertR = pv.insertNewProvider(username, password, idCard, phone, email, address, owner);
+            String provider_status = "not_approve";
+            
+            
+            Boolean insertR = pv.insertNewProvider(username, password, idCard, phone, email, address, owner,provider_status);
             if (insertR) {
-                response.sendRedirect("login_provider.jsp");
+                response.sendRedirect("signup_provider_success.jsp");
             } else {
 
             }

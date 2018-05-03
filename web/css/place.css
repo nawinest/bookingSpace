@@ -215,3 +215,16 @@ margin: 0 auto;
    background-color :red;
    border-radius: 5px;
 }
+
+.comment-wrap{
+    padding:0.35em;
+}
+
+.comment-button{
+    border: none;
+    
+}
+
+.comment-button:hover{
+   cursor: pointer;
+}
